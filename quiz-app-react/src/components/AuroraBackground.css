@@ -1,0 +1,69 @@
+.aurora-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: var(--void-deep);
+    overflow: hidden;
+}
+
+.aurora-layers {
+    position: absolute;
+    width: 140%;
+    height: 140%;
+    top: -20%;
+    left: -20%;
+}
+
+.aurora-light {
+    position: absolute;
+    width: 60vw;
+    height: 60vw;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.25;
+    mix-blend-mode: screen;
+}
+
+.light-1 {
+    background: radial-gradient(circle, var(--aurora-1), transparent 70%);
+    top: -10%;
+    left: 10%;
+}
+
+.light-2 {
+    background: radial-gradient(circle, var(--aurora-2), transparent 70%);
+    bottom: -10%;
+    right: 10%;
+}
+
+.light-3 {
+    background: radial-gradient(circle, var(--aurora-4), transparent 70%);
+    top: 30%;
+    left: 40%;
+    width: 40vw;
+    height: 40vw;
+}
+
+.aurora-texture {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+    opacity: 0.15;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+}
+
+/* Acrylic Container Base */
+.acrylic {
+    background: var(--acrylic-bg);
+    backdrop-filter: blur(var(--acrylic-blur)) saturate(var(--acrylic-saturate));
+    -webkit-backdrop-filter: blur(var(--acrylic-blur)) saturate(var(--acrylic-saturate));
+    border: 1px solid var(--acrylic-border);
+    box-shadow: var(--acrylic-shadow);
+}

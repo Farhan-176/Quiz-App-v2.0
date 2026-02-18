@@ -1,0 +1,62 @@
+[
+    {
+        "id": "1",
+        "question": "Which language runs in a web browser?",
+        "options": [
+            "Python",
+            "Java",
+            "JavaScript",
+            "HTML"
+        ],
+        "correctIndex": 2,
+        "category": "Programming"
+    },
+    {
+        "id": "2",
+        "question": "What is the capital of France?",
+        "options": [
+            "Berlin",
+            "Madrid",
+            "Paris",
+            "Rome"
+        ],
+        "correctIndex": 2,
+        "category": "Geography"
+    },
+    {
+        "id": "3",
+        "question": "Which tag is used for creating a hyperlink?",
+        "options": [
+            "<link>",
+            "<a>",
+            "<href>",
+            "<h>"
+        ],
+        "correctIndex": 1,
+        "category": "Web Dev"
+    },
+    {
+        "id": "4",
+        "question": "What is 2 + 2?",
+        "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+        ],
+        "correctIndex": 1,
+        "category": "Math"
+    },
+    {
+        "id": "5",
+        "question": "Which is not a programming language?",
+        "options": [
+            "Python",
+            "HTML",
+            "Java",
+            "C++"
+        ],
+        "correctIndex": 1,
+        "category": "Programming"
+    }
+]

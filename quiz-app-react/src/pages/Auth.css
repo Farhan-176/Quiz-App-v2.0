@@ -1,0 +1,128 @@
+.auth-master-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-void {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    perspective: 1000px;
+}
+
+.auth-vault {
+    width: 100%;
+    max-width: 500px;
+    padding: 4rem;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--acrylic-border);
+    position: relative;
+    overflow: hidden;
+}
+
+.vault-header {
+    margin-bottom: 4rem;
+    text-align: center;
+}
+
+.vault-tag {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--text-ghost);
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.vault-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.input-field label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-ghost);
+    padding-left: 0.5rem;
+}
+
+.input-field input {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--acrylic-border);
+    padding: 1.25rem 1.5rem;
+    border-radius: var(--radius-lg);
+    color: white;
+    font-family: var(--font-interface);
+    font-size: 1rem;
+    transition: var(--transition-fluid);
+    outline: none;
+}
+
+.auth-error-chip {
+    padding: 1rem;
+    background: rgba(244, 63, 94, 0.1);
+    border: 1px solid rgba(244, 63, 94, 0.2);
+    border-radius: var(--radius-lg);
+    color: var(--aurora-3);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.vault-footer {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.switch-btn {
+    background: none;
+    border: none;
+    color: var(--text-ghost);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition-fluid);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.switch-btn:hover {
+    color: white;
+}
+
+.demo-vault-info {
+    margin-top: 3rem;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-circle);
+    border: 1px solid var(--acrylic-border);
+}
+
+.demo-vault-info p {
+    font-size: 0.8rem;
+    color: var(--text-ghost);
+    margin: 0;
+}
+
+.demo-vault-info span {
+    color: white;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .auth-vault {
+        padding: 3rem 1.5rem;
+    }
+}
