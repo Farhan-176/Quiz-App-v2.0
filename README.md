@@ -1,118 +1,112 @@
 # Quiz App v2.0.0
 
-A modern, fully functional quiz application built with React, featuring enhanced UI/UX, smooth animations, and a robust backend.
+A modern, fully functional quiz application with a sleek React frontend and a lightweight Express API. Built for smooth UX, fast loads, and easy local setup.
 
-## 🚀 Live Demo
+## Live Demo
 
-**TAKE QUIZ AT** https://quiz-app-176.netlify.app/
+TAKE QUIZ AT: https://quiz-app-176.netlify.app/
 
-## 📋 Features
+## Highlights
 
-- ✨ Modern React 19 with Vite
-- 🎨 Beautiful UI with Framer Motion animations
-- 🎭 Aurora and particle background effects
-- 🔐 User authentication with JWT
-- 📊 Quiz management system
-- 💾 MongoDB database integration
-- 🔄 Express.js backend API
-- 📱 Responsive design
+- React 19 + Vite frontend with animated UI
+- Express API for auth and quiz data
+- JWT-based authentication
+- JSON file storage (no database required)
+- Responsive layout for mobile and desktop
 
-## 🛠 Tech Stack
+## Tech Stack
 
-**Frontend:**
-- React 19
+Frontend:
+- React
 - Vite
 - Framer Motion
 - React Router DOM
 - Axios
 
-**Backend:**
-- Node.js & Express.js
-- MongoDB & Mongoose
-- JWT authentication
+Backend:
+- Node.js
+- Express
+- JSON storage
+- JWT
 - Bcryptjs
 - CORS
 
-## 📦 Installation
+## Quick Start
 
-### Prerequisites
-- Node.js (v14+)
-- MongoDB
+Prerequisites:
+- Node.js 14+
 
-### Setup
-
-1. **Clone the repository**
+1) Clone
 ```bash
 git clone https://github.com/Farhan-176/Quiz-App-v2.0.git
-cd quiz-app
+cd quiz app
 ```
 
-2. **Install dependencies**
+2) Install
 ```bash
-# Root dependencies
+# Backend
+cd backend
 npm install
+cd ..
 
-# React app dependencies
-cd quiz-app-react
+# Frontend
+cd frontend
 npm install
 cd ..
 ```
 
-3. **Create .env file**
+3) Configure (backend/.env)
 ```
-MONGODB_URI=your_mongodb_uri
 JWT_SECRET=your_jwt_secret
 PORT=5000
 ```
 
-4. **Run the application**
+4) Run
 ```bash
-# Terminal 1: Backend server
-node server.js
+# Terminal 1
+cd backend
+npm start
 
-# Terminal 2: Frontend dev server
-cd quiz-app-react
+# Terminal 2
+cd frontend
 npm run dev
 ```
 
-## 📂 Project Structure
+## Project Structure
 
 ```
-quiz-app/
-├── quiz-app-react/          # React frontend
-│   ├── src/
-│   │   ├── components/      # Reusable components
-│   │   ├── pages/          # Page components
-│   │   ├── App.jsx
-│   │   └── main.jsx
-│   ├── vite.config.js
+quiz app/
+├── backend/
+│   ├── routes/
+│   ├── data/
+│   ├── server.js
 │   └── package.json
-├── routes/                 # Express API routes
-├── models/                 # MongoDB schemas
-├── server.js              # Express server
-└── package.json
+└── frontend/
+    ├── src/
+    │   ├── components/
+    │   ├── pages/
+    │   ├── App.jsx
+    │   └── main.jsx
+    ├── vite.config.js
+    └── package.json
 ```
 
-## 📝 Version History
+## Version History
 
-- **v2.0.0** - Current version with React rewrite, enhanced animations, and modern tooling
-- **v1.0.0** - Legacy version (see [v1 repo](https://github.com/Farhan-176/Quiz-App))
+- v2.0.0 - React rewrite, modern animations, backend split
+- v1.0.0 - Legacy version (see https://github.com/Farhan-176/Quiz-App)
 
-## 🎯 Next Steps / Roadmap
+## Roadmap
 
-- [ ] Add admin panel
-- [ ] Quiz analytics
-- [ ] Leaderboard system
-- [ ] Mobile app version
+- Admin panel
+- Quiz analytics
+- Leaderboards
+- Mobile app
 
-## 🤝 Contributing
-
-Feel free to fork and submit pull requests!
-
-## 📄 License
+## License
 
 ISC
 
-## 👤 Author
+## Author
 
 Farhan-176
