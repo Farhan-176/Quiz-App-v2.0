@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
@@ -30,46 +31,56 @@ function Result() {
         const username = localStorage.getItem('username') || 'Elite Member';
         const score = parseInt(localStorage.getItem('currentScore'));
         const total = parseInt(localStorage.getItem('totalQuestions'));
+        const remainingLives = parseInt(localStorage.getItem('remainingLives'));
 
         if (!questions || !userAnswers) {
             navigate('/quiz');
             return;
         }
 
-        setResultData({ questions, userAnswers, username, score, total });
+        setResultData({ questions, userAnswers, username, score, total, remainingLives });
 
         const percentage = Math.round((score / total) * 100);
-        if (percentage >= 60) {
-            const duration = 5 * 1000;
-            const end = Date.now() + duration;
 
-            (function frame() {
-                confetti({
-                    particleCount: 2,
-                    angle: 60,
-                    spread: 55,
-                    origin: { x: 0 },
-                    colors: ['#6366f1', '#ffffff']
+        // Submit score to leaderboard
+        const submitScore = async () => {
+            try {
+                await axios.post('http://localhost:5000/api/quiz/submit-score', {
+                    username,
+                    score,
+                    total,
+                    percentage
                 });
-                confetti({
-                    particleCount: 2,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: 1 },
-                    colors: ['#a855f7', '#ffffff']
-                });
+            } catch (err) {
+                console.error('Failed to submit score', err);
+            }
+        };
+        submitScore();
 
-                if (Date.now() < end) {
-                    requestAnimationFrame(frame);
-                }
-            }());
+        if (percentage >= 60 && remainingLives > 0) {
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#6366f1', '#a855f7', '#ffffff']
+            });
         }
     }, [navigate]);
 
     if (!resultData) return null;
 
-    const { questions, userAnswers, username, score, total } = resultData;
+    const { questions, userAnswers, username, score, total, remainingLives } = resultData;
     const percentage = Math.round((score / total) * 100);
+
+    const getMasteryLevel = () => {
+        if (remainingLives === 0) return { title: "System Failure", tag: "Critical", icon: "⚠️" };
+        if (percentage >= 90) return { title: "Omniscient Master", tag: "Ascended", icon: "👁️" };
+        if (percentage >= 75) return { title: "Grand Strategist", tag: "Elite", icon: "⚔️" };
+        if (percentage >= 60) return { title: "Adept Scholar", tag: "Stable", icon: "📚" };
+        return { title: "Novice Initiate", tag: "Learning", icon: "🌱" };
+    };
+
+    const mastery = getMasteryLevel();
 
     return (
         <div className="victory-master-wrapper">
@@ -83,9 +94,11 @@ function Result() {
                     animate="visible"
                 >
                     <motion.div className="reel-header" variants={itemFade}>
-                        <span className="reel-tag">{percentage >= 60 ? 'Mastery Confirmed' : 'Assessment Concluded'}</span>
+                        <span className={`reel-tag ${remainingLives === 0 ? 'critical' : ''}`}>
+                            {remainingLives === 0 ? 'Forced Termination' : 'Assessment Concluded'}
+                        </span>
                         <h1 className="display-text small centered">
-                            Analysis of <br />
+                            {mastery.title} <br />
                             <span className="ethereal-gradient">{username}</span>
                         </h1>
                     </motion.div>
@@ -95,7 +108,7 @@ function Result() {
                             <svg viewBox="0 0 100 100">
                                 <circle className="bg" cx="50" cy="50" r="45" />
                                 <motion.circle
-                                    className="progress"
+                                    className={`progress ${remainingLives === 0 ? 'fail' : ''}`}
                                     cx="50" cy="50" r="45"
                                     initial={{ strokeDasharray: "0 283" }}
                                     animate={{ strokeDasharray: `${(percentage / 100) * 283} 283` }}
@@ -104,29 +117,29 @@ function Result() {
                             </svg>
                             <div className="radial-content">
                                 <span className="val">{percentage}%</span>
-                                <span className="lab">Global Rank</span>
+                                <span className="lab">{mastery.tag}</span>
                             </div>
                         </div>
 
                         <div className="metrics-track">
                             <div className="track-item acrylic">
-                                <span className="v">0{score}</span>
-                                <span className="l">Resolved</span>
+                                <span className="v">{remainingLives}/3</span>
+                                <span className="l">Sync Stability</span>
                             </div>
                             <div className="track-item acrylic">
-                                <span className="v">0{total - score}</span>
-                                <span className="l">Mismatched</span>
+                                <span className="v">{score}/{total}</span>
+                                <span className="l">Nodes Resolved</span>
                             </div>
-                            <div className="track-item acrylic">
-                                <span className="v">{total}</span>
-                                <span className="l">Total Nodes</span>
+                            <div className="track-item achievement acrylic">
+                                <span className="icon">{mastery.icon}</span>
+                                <span className="l">Rank Status</span>
                             </div>
                         </div>
                     </motion.div>
 
                     <motion.div className="victory-actions" variants={itemFade}>
                         <Link to="/quiz" className="btn-master outline">Re-Initialize Session</Link>
-                        <Link to="/" className="btn-master ghost">Exit to Terminal</Link>
+                        <Link to="/" className="btn-master ghost">Back to Terminal</Link>
                     </motion.div>
                 </motion.section>
 
@@ -134,32 +147,41 @@ function Result() {
                     <h2 className="display-text xsmall centered">Data Node <span className="ethereal-gradient">Review</span></h2>
 
                     <div className="review-stream">
-                        {questions.map((q, i) => (
-                            <motion.div
-                                key={i}
-                                className={`review-node acrylic ${userAnswers[i] === q.correctIndex ? 'valid' : 'invalid'}`}
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.1 }}
-                            >
-                                <div className="node-header">
-                                    <span className="node-code">PHA_0{i + 1}</span>
-                                    <span className="node-status">{userAnswers[i] === q.correctIndex ? 'STABLE' : 'ANOMALY'}</span>
-                                </div>
-                                <h3>{q.question}</h3>
-                                <div className="node-compare">
-                                    <div className="input-block">
-                                        <label>Input</label>
-                                        <span>{q.options[userAnswers[i]] || 'VOID'}</span>
+                        {questions.map((q, i) => {
+                            const isCorrect = userAnswers[i] === q.correctIndex;
+                            const isSkipped = userAnswers[i] === -1 || userAnswers[i] === undefined;
+
+                            return (
+                                <motion.div
+                                    key={i}
+                                    className={`review-node acrylic ${isCorrect ? 'valid' : 'invalid'} ${isSkipped ? 'skipped' : ''}`}
+                                    initial={{ opacity: 0, x: -20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: i * 0.1 }}
+                                >
+                                    <div className="node-header">
+                                        <span className="node-code">NODE_0{i + 1}</span>
+                                        <span className="node-status">
+                                            {isCorrect ? 'STABLE' : isSkipped ? 'TIMED OUT' : 'ANOMALY'}
+                                        </span>
                                     </div>
-                                    <div className="target-block">
-                                        <label>Target</label>
-                                        <span>{q.options[q.correctIndex]}</span>
+                                    <h3>{q.question}</h3>
+                                    <div className="node-compare">
+                                        <div className="input-block">
+                                            <label>Your Input</label>
+                                            <span className={isCorrect ? 'text-correct' : 'text-incorrect'}>
+                                                {isSkipped ? 'NO SIGNAL' : q.options[userAnswers[i]]}
+                                            </span>
+                                        </div>
+                                        <div className="target-block">
+                                            <label>Correct Vector</label>
+                                            <span>{q.options[q.correctIndex]}</span>
+                                        </div>
                                     </div>
-                                </div>
-                            </motion.div>
-                        ))}
+                                </motion.div>
+                            );
+                        })}
                     </div>
                 </section>
             </main>

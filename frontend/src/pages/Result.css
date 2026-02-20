@@ -24,6 +24,11 @@
     display: block;
 }
 
+.reel-tag.critical {
+    color: var(--aurora-3);
+    text-shadow: 0 0 15px var(--aurora-3);
+}
+
 .performance-hub {
     display: flex;
     align-items: center;
@@ -52,9 +57,17 @@
 }
 
 .radial-visual circle.progress {
+    fill: none;
     stroke: white;
+    stroke-width: 2;
     stroke-linecap: round;
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+}
+
+.progress.fail {
+    stroke: var(--aurora-3);
+    stroke-opacity: 0.5;
 }
 
 .radial-content {
@@ -202,6 +215,31 @@
 .node-compare span {
     font-weight: 600;
     color: var(--text-ethereal);
+}
+
+.track-item.achievement {
+    border-color: var(--aurora-2);
+}
+
+.track-item .icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.text-correct {
+    color: #10b981;
+}
+
+.text-incorrect {
+    color: #ef4444;
+}
+
+.review-node.skipped {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.review-node.skipped .node-status {
+    color: var(--text-ghost);
 }
 
 @media (max-width: 768px) {

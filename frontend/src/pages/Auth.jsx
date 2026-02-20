@@ -43,18 +43,18 @@ function Auth() {
         setError('');
 
         try {
-            const endpoint = isLogin ? '/api/login' : '/api/register';
+            const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
             const response = await axios.post(`http://localhost:5000${endpoint}`, formData);
 
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('currentUser', JSON.stringify({
-                username: response.data.username || formData.username,
-                email: formData.email
+                username: response.data.user.username,
+                email: response.data.user.email
             }));
 
             navigate('/');
         } catch (err) {
-            setError(err.response?.data?.message || 'Authentication failed');
+            setError(err.response?.data?.msg || err.response?.data?.message || 'Authentication failed');
         } finally {
             setIsLoading(false);
         }
@@ -83,13 +83,26 @@ function Auth() {
                         </div>
 
                         <form className="vault-form" onSubmit={handleSubmit}>
+                            <div className="input-field">
+                                <label>Email Address</label>
+                                <motion.input
+                                    type="email"
+                                    name="email"
+                                    placeholder="user@network.com"
+                                    onChange={handleChange}
+                                    variants={inputVariants}
+                                    whileFocus="focus"
+                                    required
+                                />
+                            </div>
+
                             {!isLogin && (
                                 <div className="input-field">
-                                    <label>Email Address</label>
+                                    <label>Username</label>
                                     <motion.input
-                                        type="email"
-                                        name="email"
-                                        placeholder="user@network.com"
+                                        type="text"
+                                        name="username"
+                                        placeholder="DESIGNATOR"
                                         onChange={handleChange}
                                         variants={inputVariants}
                                         whileFocus="focus"
@@ -97,19 +110,6 @@ function Auth() {
                                     />
                                 </div>
                             )}
-
-                            <div className="input-field">
-                                <label>Username</label>
-                                <motion.input
-                                    type="text"
-                                    name="username"
-                                    placeholder="DESIGNATOR"
-                                    onChange={handleChange}
-                                    variants={inputVariants}
-                                    whileFocus="focus"
-                                    required
-                                />
-                            </div>
 
                             <div className="input-field">
                                 <label>Access Key</label>

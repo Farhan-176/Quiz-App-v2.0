@@ -10,5 +10,35 @@
     "username": "",
     "email": "",
     "password": "$2b$10$s28PEnhtsmDlK20rYgW.zeDvpA7/r.5jJ47.LfHiRWX5aylLgeAO2"
+  },
+  {
+    "id": "1771582667468",
+    "username": "afridi",
+    "email": "afridi@gmail.com",
+    "password": "$2b$10$uYAAwCehmFqa8.uLgYqbW.vlHjr2umRUqFHWgH47FkcxNfPKwl6Py"
+  },
+  {
+    "id": "1771582737730",
+    "username": "afridi1",
+    "email": "afridi1@gmail.com",
+    "password": "$2b$10$gAm7c.aiviy.98laHlY0Le74K1tLZJ4XUvolRPSyXaujLkKlsqTWm"
+  },
+  {
+    "id": "1771583627285",
+    "username": "FinalTest1",
+    "email": "finaltest1@test.com",
+    "password": "$2b$10$15DnzKjkKXsIUpGJjbYzuufjN5dUc1GzzObU9EIzyixup0zunY6TC"
+  },
+  {
+    "id": "1771583746141",
+    "username": "FinalTest1",
+    "email": "finaltest2@test.com",
+    "password": "$2b$10$Lwx2FOGKXn/BU5UHlODj2eEIBwoJD6hytW0pU5kh67vvosgMhm3IS"
+  },
+  {
+    "id": "1771584062368",
+    "username": "afridi3",
+    "email": "afridi3@gmail.com",
+    "password": "$2b$10$xIZjThrJsBiQdOiaB.NXdue7whdlNduQ.Qz1c9XSs0.gqmjfMc9Vq"
   }
 ]

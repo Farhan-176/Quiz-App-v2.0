@@ -15,16 +15,24 @@ function Quiz() {
     const [questions, setQuestions] = useState([]);
     const [currentIdx, setCurrentIdx] = useState(0);
     const [answers, setAnswers] = useState({});
-    const [timer, setTimer] = useState(30);
+    const [lives, setLives] = useState(3);
+    const [timer, setTimer] = useState(15);
     const [isLoading, setIsLoading] = useState(true);
+    const [isAnswered, setIsAnswered] = useState(false);
+    const [feedback, setFeedback] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchQuiz = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/quizzes');
-                const quizData = response.data[0];
-                setQuestions(quizData.questions);
+                const response = await axios.get('http://localhost:5000/api/quiz');
+                // The backend returns an array of questions directly
+                if (Array.isArray(response.data)) {
+                    setQuestions(response.data);
+                } else if (response.data.questions) {
+                    // Fallback for wrapped object structure
+                    setQuestions(response.data.questions);
+                }
                 setIsLoading(false);
             } catch (err) {
                 console.error('Failed to fetch quiz', err);
@@ -34,28 +42,74 @@ function Quiz() {
         fetchQuiz();
     }, [navigate]);
 
+    // Per-question timer logic
     useEffect(() => {
-        if (timer > 0 && !isLoading) {
+        if (timer > 0 && !isLoading && !isAnswered) {
             const interval = setInterval(() => setTimer(t => t - 1), 1000);
             return () => clearInterval(interval);
-        } else if (timer === 0) {
-            handleComplete();
+        } else if (timer === 0 && !isAnswered) {
+            handleAnswer(-1); // Auto-fail on timeout
         }
-    }, [timer, isLoading]);
+    }, [timer, isLoading, isAnswered]);
+
+    // Keyboard Shortcuts
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (isAnswered || isLoading) return;
+
+            if (e.key >= '1' && e.key <= '4') {
+                const idx = parseInt(e.key) - 1;
+                if (questions[currentIdx]?.options[idx]) {
+                    handleAnswer(idx);
+                }
+            }
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [isAnswered, isLoading, currentIdx, questions]);
 
     const handleAnswer = (optionIdx) => {
+        if (isAnswered) return;
+
+        setIsAnswered(true);
+        setFeedback(optionIdx);
+
+        const currentQ = questions[currentIdx];
+        const isCorrect = optionIdx === currentQ.correctIndex;
+
+        if (!isCorrect) {
+            setLives(prev => {
+                const newLives = prev - 1;
+                if (newLives <= 0) {
+                    setTimeout(() => handleComplete(0), 1000); // Pass 0 as current score if needed, or let handleComplete calculate
+                }
+                return newLives;
+            });
+        }
+
         setAnswers({ ...answers, [currentIdx]: optionIdx });
+
+        // Auto-advance after delay
+        setTimeout(() => {
+            if (lives > 0 || isCorrect) {
+                handleNext();
+            }
+        }, 1500);
     };
 
     const handleNext = () => {
         if (currentIdx < questions.length - 1) {
             setCurrentIdx(currentIdx + 1);
+            setTimer(15);
+            setIsAnswered(false);
+            setFeedback(null);
         } else {
             handleComplete();
         }
     };
 
-    const handleComplete = () => {
+    const handleComplete = (forcedLives) => {
+        const finalLives = forcedLives !== undefined ? forcedLives : lives;
         const score = questions.reduce((acc, q, idx) => {
             return acc + (answers[idx] === q.correctIndex ? 1 : 0);
         }, 0);
@@ -64,11 +118,16 @@ function Quiz() {
         localStorage.setItem('userAnswers', JSON.stringify(answers));
         localStorage.setItem('currentScore', score);
         localStorage.setItem('totalQuestions', questions.length);
+        localStorage.setItem('remainingLives', finalLives);
 
         navigate('/result');
     };
 
-    if (isLoading) return null;
+    if (isLoading) return (
+        <div className="quiz-zen-wrapper flex-center">
+            <div className="zen-loader">Synchronizing Cognitive Channels...</div>
+        </div>
+    );
 
     const currentQ = questions[currentIdx];
     const progress = ((currentIdx + 1) / questions.length) * 100;
@@ -77,11 +136,29 @@ function Quiz() {
         <div className="quiz-zen-wrapper">
             <Navbar />
 
-            {/* Atmospheric Timer: Glows and pulses color based on temperature */}
-            <div className={`atmospheric-timer ${timer < 10 ? 'critical' : timer < 20 ? 'warning' : 'safe'}`} />
+            {/* Atmospheric Timer */}
+            <div className={`atmospheric-timer ${timer < 5 ? 'critical' : timer < 10 ? 'warning' : 'safe'}`} />
 
             <main className="zen-void container">
                 <div className="zen-header">
+                    <div className="header-top">
+                        <div className="lives-display">
+                            {[...Array(3)].map((_, i) => (
+                                <motion.span
+                                    key={i}
+                                    className={`heart ${i < lives ? 'active' : 'depleted'}`}
+                                    animate={i === lives - 1 && isAnswered && feedback !== currentQ.correctIndex ? { scale: [1, 1.5, 1], opacity: [1, 0] } : {}}
+                                >
+                                    ♥
+                                </motion.span>
+                            ))}
+                        </div>
+                        <div className="zen-meta">
+                            <span className="q-count">Phase {currentIdx + 1} / {questions.length}</span>
+                            <span className="time-display">{timer}s</span>
+                        </div>
+                    </div>
+
                     <div className="zen-progress-bar">
                         <motion.div
                             className="progress-inner"
@@ -89,10 +166,6 @@ function Quiz() {
                             animate={{ width: `${progress}%` }}
                             transition={{ duration: 1, ease: "circOut" }}
                         />
-                    </div>
-                    <div className="zen-meta">
-                        <span className="q-count">Session Phase {currentIdx + 1} / {questions.length}</span>
-                        <span className="time-display">{timer}s <span>Remaining</span></span>
                     </div>
                 </div>
 
@@ -108,38 +181,46 @@ function Quiz() {
                         <h1 className="display-text small centered">{currentQ.question}</h1>
 
                         <div className="zen-options-grid">
-                            {currentQ.options.map((option, idx) => (
-                                <motion.div
-                                    key={idx}
-                                    className={`zen-option ${answers[currentIdx] === idx ? 'selected' : ''}`}
-                                    onClick={() => handleAnswer(idx)}
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
-                                >
-                                    <span className="opt-indicator">{String.fromCharCode(65 + idx)}</span>
-                                    <span className="opt-text">{option}</span>
-                                    {answers[currentIdx] === idx && (
-                                        <motion.div
-                                            className="selection-glow"
-                                            layoutId="glow"
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
-                                        />
-                                    )}
-                                </motion.div>
-                            ))}
+                            {currentQ.options.map((option, idx) => {
+                                const isCorrect = idx === currentQ.correctIndex;
+                                const isSelected = feedback === idx;
+                                let statusClass = '';
+
+                                if (isAnswered) {
+                                    if (isCorrect) statusClass = 'correct';
+                                    else if (isSelected) statusClass = 'incorrect';
+                                    else statusClass = 'dimmed';
+                                }
+
+                                return (
+                                    <motion.div
+                                        key={idx}
+                                        className={`zen-option ${isSelected ? 'selected' : ''} ${statusClass}`}
+                                        onClick={() => handleAnswer(idx)}
+                                        whileHover={!isAnswered ? { scale: 1.02, backgroundColor: 'rgba(255,255,255,0.05)' } : {}}
+                                        whileTap={!isAnswered ? { scale: 0.98 } : {}}
+                                    >
+                                        <span className="opt-indicator">{idx + 1}</span>
+                                        <span className="opt-text">{option}</span>
+                                        {isSelected && (
+                                            <motion.div
+                                                className="selection-glow"
+                                                layoutId="glow"
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                            />
+                                        )}
+                                    </motion.div>
+                                );
+                            })}
                         </div>
                     </motion.div>
                 </AnimatePresence>
 
                 <div className="zen-footer">
-                    <button
-                        className="btn-master ghost"
-                        onClick={handleNext}
-                        disabled={answers[currentIdx] === undefined}
-                    >
-                        {currentIdx === questions.length - 1 ? 'Finalize Session' : 'Proceed to Next Phase'}
-                    </button>
+                    <div className="keyboard-hint">
+                        Use keys <span className="key">1</span>-<span className="key">4</span> to select
+                    </div>
                 </div>
             </main>
         </div>

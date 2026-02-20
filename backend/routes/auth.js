@@ -36,10 +36,15 @@ router.post('/register', async (req, res) => {
         users.push(newUser);
         saveUsers(users);
 
+        if (!process.env.JWT_SECRET) {
+            console.error('CRITICAL: JWT_SECRET is not defined in .env');
+            return res.status(500).json({ msg: 'Server configuration error' });
+        }
+
         const token = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
         res.json({ token, user: { id: newUser.id, username: newUser.username, email: newUser.email } });
     } catch (err) {
-        console.error(err);
+        console.error('Registration Error:', err);
         res.status(500).send('Server error');
     }
 });
@@ -56,10 +61,15 @@ router.post('/login', async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(400).json({ msg: 'Invalid credentials' });
 
+        if (!process.env.JWT_SECRET) {
+            console.error('CRITICAL: JWT_SECRET is not defined in .env');
+            return res.status(500).json({ msg: 'Server configuration error' });
+        }
+
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
         res.json({ token, user: { id: user.id, username: user.username, email: user.email } });
     } catch (err) {
-        console.error(err);
+        console.error('Login Error:', err);
         res.status(500).send('Server error');
     }
 });

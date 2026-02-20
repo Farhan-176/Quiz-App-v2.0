@@ -54,7 +54,35 @@
 
 /* Zen Elements */
 .zen-header {
-    margin-bottom: 5rem;
+    margin-bottom: 3rem;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.lives-display {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.heart {
+    font-size: 1.5rem;
+    color: var(--text-ghost);
+    transition: all 0.3s ease;
+}
+
+.heart.active {
+    color: var(--aurora-3);
+    text-shadow: 0 0 10px var(--aurora-3);
+}
+
+.heart.depleted {
+    opacity: 0.2;
+    transform: scale(0.8);
 }
 
 .zen-progress-bar {
@@ -135,6 +163,33 @@
     border-color: white;
 }
 
+.zen-option.correct {
+    border-color: #10b981;
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.zen-option.correct .opt-indicator {
+    background: #10b981;
+    color: white;
+    border-color: #10b981;
+}
+
+.zen-option.incorrect {
+    border-color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.zen-option.incorrect .opt-indicator {
+    background: #ef4444;
+    color: white;
+    border-color: #ef4444;
+}
+
+.zen-option.dimmed {
+    opacity: 0.3;
+    filter: blur(2px);
+}
+
 .opt-indicator {
     font-size: 0.8rem;
     font-weight: 800;
@@ -171,9 +226,27 @@
 }
 
 .zen-footer {
-    margin-top: 6rem;
+    margin-top: 4rem;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.keyboard-hint {
+    font-size: 0.75rem;
+    color: var(--text-ghost);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.keyboard-hint .key {
+    padding: 0.2rem 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--acrylic-border);
+    border-radius: 4px;
+    margin: 0 0.2rem;
+    color: white;
 }
 
 @media (max-width: 768px) {

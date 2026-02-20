@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import './Home.css';
 
@@ -29,7 +29,19 @@ const textFade = {
 
 function Home() {
     const featureRef = useRef(null);
+    const [user, setUser] = useState(null);
     const { scrollYProgress } = useScroll();
+
+    useEffect(() => {
+        try {
+            const storedUser = localStorage.getItem('currentUser');
+            if (storedUser && storedUser !== 'undefined') {
+                setUser(JSON.parse(storedUser));
+            }
+        } catch (e) {
+            console.error('Failed to parse user', e);
+        }
+    }, []);
 
     // Smooth cinematic parallax
     const heroOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
@@ -67,12 +79,18 @@ function Home() {
                             </motion.p>
 
                             <motion.div className="cta-group" variants={textFade}>
-                                <Link to="/auth" className="btn-master outline">
-                                    Begin Integration
+                                {user ? (
+                                    <Link to="/quiz" className="btn-master outline">
+                                        Initialize Quiz
+                                    </Link>
+                                ) : (
+                                    <Link to="/auth" className="btn-master outline">
+                                        Begin Integration
+                                    </Link>
+                                )}
+                                <Link to="/leaderboard" className="btn-master ghost">
+                                    Global Rankings
                                 </Link>
-                                <button className="btn-master ghost">
-                                    Explore Philosophy
-                                </button>
                             </motion.div>
                         </div>
                     </div>
@@ -186,7 +204,11 @@ function Home() {
                             transition={{ duration: 1.5 }}
                         >
                             <h2 className="display-text small">Become the <br /> <span className="ethereal-gradient">Master.</span></h2>
-                            <Link to="/auth" className="btn-master full-width">Claim Your Digital Identity</Link>
+                            {user ? (
+                                <Link to="/quiz" className="btn-master full-width">Launch Mastery Node</Link>
+                            ) : (
+                                <Link to="/auth" className="btn-master full-width">Claim Your Digital Identity</Link>
+                            )}
                         </motion.div>
                     </div>
                 </section>

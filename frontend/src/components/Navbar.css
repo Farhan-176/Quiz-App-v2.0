@@ -14,7 +14,7 @@
 .navbar.scrolled {
     top: 1rem;
     width: auto;
-    min-width: 600px;
+    min-width: 760px;
     background: var(--acrylic-bg);
     backdrop-filter: blur(var(--acrylic-blur)) saturate(var(--acrylic-saturate));
     -webkit-backdrop-filter: blur(var(--acrylic-blur)) saturate(var(--acrylic-saturate));
@@ -26,6 +26,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 4rem;
+    /* Safety gap between logo and links */
 }
 
 .nav-logo {
