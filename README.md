@@ -12,6 +12,7 @@ TAKE QUIZ AT: https://quiz-app-176.netlify.app/
 - Express API for auth and quiz data
 - JWT-based authentication
 - JSON file storage (no database required)
+- Leaderboard support
 - Responsive layout for mobile and desktop
 
 ## Tech Stack
@@ -100,7 +101,6 @@ quiz app/
 
 - Admin panel
 - Quiz analytics
-- Leaderboards
 - Mobile app
 
 ## License
