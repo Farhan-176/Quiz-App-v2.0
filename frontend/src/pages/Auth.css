@@ -1,5 +1,6 @@
 .auth-master-wrapper {
-    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
 }
@@ -10,14 +11,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 5rem 2rem 1rem;
     perspective: 1000px;
+    overflow: hidden;
 }
 
 .auth-vault {
     width: 100%;
-    max-width: 500px;
-    padding: 4rem;
+    max-width: 480px;
+    padding: 2.5rem 3rem;
     border-radius: var(--radius-xl);
     border: 1px solid var(--acrylic-border);
     position: relative;
@@ -25,7 +27,7 @@
 }
 
 .vault-header {
-    margin-bottom: 4rem;
+    margin-bottom: 1rem;
     text-align: center;
 }
 
@@ -35,20 +37,20 @@
     text-transform: uppercase;
     letter-spacing: 0.3em;
     color: var(--text-ghost);
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     display: block;
 }
 
 .vault-form {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
 }
 
 .input-field {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.5rem;
 }
 
 .input-field label {
@@ -63,7 +65,7 @@
 .input-field input {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid var(--acrylic-border);
-    padding: 1.25rem 1.5rem;
+    padding: 0.9rem 1.25rem;
     border-radius: var(--radius-lg);
     color: white;
     font-family: var(--font-interface);
@@ -73,17 +75,17 @@
 }
 
 .auth-error-chip {
-    padding: 1rem;
+    padding: 0.75rem;
     background: rgba(244, 63, 94, 0.1);
     border: 1px solid rgba(244, 63, 94, 0.2);
     border-radius: var(--radius-lg);
     color: var(--aurora-3);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     text-align: center;
 }
 
 .vault-footer {
-    margin-top: 3rem;
+    margin-top: 0.75rem;
     text-align: center;
 }
 
@@ -103,8 +105,8 @@
 }
 
 .demo-vault-info {
-    margin-top: 3rem;
-    padding: 1rem 2rem;
+    margin-top: 1.5rem;
+    padding: 0.75rem 1.5rem;
     background: rgba(255, 255, 255, 0.05);
     border-radius: var(--radius-circle);
     border: 1px solid var(--acrylic-border);
@@ -121,8 +123,21 @@
     font-weight: 700;
 }
 
+/* ── Auth-page overrides for global classes ── */
+.auth-vault .display-text.small {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin-bottom: 0;
+    line-height: 1.1;
+}
+
+.auth-vault .btn-master.full-width {
+    margin-top: 0.5rem;
+    padding: 0.9rem 1.5rem;
+    font-size: 1rem;
+}
+
 @media (max-width: 768px) {
     .auth-vault {
-        padding: 3rem 1.5rem;
+        padding: 2rem 1.25rem;
     }
 }

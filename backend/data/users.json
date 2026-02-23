@@ -40,5 +40,11 @@
     "username": "afridi3",
     "email": "afridi3@gmail.com",
     "password": "$2b$10$xIZjThrJsBiQdOiaB.NXdue7whdlNduQ.Qz1c9XSs0.gqmjfMc9Vq"
+  },
+  {
+    "id": "1771841262874",
+    "username": "admin",
+    "email": "admin@hospital.com",
+    "password": "$2b$10$qjwys1OHYLGHitPr/m2fluc69UQp27PnQlRJduoE0dG5V7S3KAQb2"
   }
 ]

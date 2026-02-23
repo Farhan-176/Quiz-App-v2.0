@@ -30,5 +30,37 @@
     "total": 5,
     "percentage": 40,
     "date": "2026-02-20T10:53:41.184Z"
+  },
+  {
+    "id": "1771839301531",
+    "username": "Elite Member",
+    "score": 3,
+    "total": 5,
+    "percentage": 60,
+    "date": "2026-02-23T09:35:01.531Z"
+  },
+  {
+    "id": "1771839301573",
+    "username": "Elite Member",
+    "score": 3,
+    "total": 5,
+    "percentage": 60,
+    "date": "2026-02-23T09:35:01.573Z"
+  },
+  {
+    "id": "1771841309307",
+    "username": "Elite Member",
+    "score": 2,
+    "total": 5,
+    "percentage": 40,
+    "date": "2026-02-23T10:08:29.308Z"
+  },
+  {
+    "id": "1771841309367",
+    "username": "Elite Member",
+    "score": 2,
+    "total": 5,
+    "percentage": 40,
+    "date": "2026-02-23T10:08:29.367Z"
   }
 ]
