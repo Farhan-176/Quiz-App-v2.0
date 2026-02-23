@@ -12,17 +12,6 @@
   /* Above Aurora background */
 }
 
-/* Hide default cursor on desktop */
-@media (pointer: fine) {
-
-  body,
-  a,
-  button,
-  [role="button"],
-  input {
-    cursor: none !important;
-  }
-}
 
 /* Global Transition Utility */
 .master-transition {

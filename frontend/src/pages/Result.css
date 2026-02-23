@@ -16,17 +16,16 @@
 
 .reel-tag {
     font-size: 0.75rem;
-    font-weight: 800;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.3em;
+    letter-spacing: 0.1em;
     color: var(--aurora-1);
     margin-bottom: 2rem;
     display: block;
 }
 
 .reel-tag.critical {
-    color: var(--aurora-3);
-    text-shadow: 0 0 15px var(--aurora-3);
+    color: #ef4444;
 }
 
 .performance-hub {
@@ -160,11 +159,11 @@
 }
 
 .review-node.valid::after {
-    background: var(--aurora-4);
+    background: #059669;
 }
 
 .review-node.invalid::after {
-    background: var(--aurora-3);
+    background: #dc2626;
 }
 
 .node-header {
@@ -214,7 +213,7 @@
 
 .node-compare span {
     font-weight: 600;
-    color: var(--text-ethereal);
+    color: var(--text-pure);
 }
 
 .track-item.achievement {
@@ -227,11 +226,11 @@
 }
 
 .text-correct {
-    color: #10b981;
+    color: #059669;
 }
 
 .text-incorrect {
-    color: #ef4444;
+    color: #dc2626;
 }
 
 .review-node.skipped {

@@ -57,7 +57,7 @@ const Navbar = () => {
         >
             <div className="nav-container">
                 <Link to="/" className="nav-logo">
-                    <span className="logo-icon">🚀</span>
+                    <div className="logo-icon">Q</div>
                     <span className="logo-text">QuizMaster</span>
                 </Link>
 

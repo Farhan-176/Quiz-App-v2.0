@@ -19,44 +19,36 @@
 
 .aurora-light {
     position: absolute;
-    width: 60vw;
-    height: 60vw;
+    width: 65vw;
+    height: 65vw;
     border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.25;
+    filter: blur(180px);
+    opacity: 0.12;
     mix-blend-mode: screen;
 }
 
 .light-1 {
-    background: radial-gradient(circle, var(--aurora-1), transparent 70%);
-    top: -10%;
-    left: 10%;
+    background: radial-gradient(circle, var(--aurora-1), transparent 75%);
+    top: -15%;
+    left: 15%;
 }
 
 .light-2 {
-    background: radial-gradient(circle, var(--aurora-2), transparent 70%);
-    bottom: -10%;
-    right: 10%;
+    background: radial-gradient(circle, var(--aurora-2), transparent 75%);
+    bottom: -15%;
+    right: 15%;
 }
 
 .light-3 {
-    background: radial-gradient(circle, var(--aurora-4), transparent 70%);
+    background: radial-gradient(circle, var(--aurora-3), transparent 75%);
     top: 30%;
-    left: 40%;
-    width: 40vw;
-    height: 40vw;
+    left: 45%;
+    width: 45vw;
+    height: 45vw;
 }
 
 .aurora-texture {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-    opacity: 0.15;
-    pointer-events: none;
-    mix-blend-mode: overlay;
+    display: none;
 }
 
 /* Acrylic Container Base */

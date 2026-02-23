@@ -5,24 +5,32 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import './Auth.css';
 
+const springTransition = {
+    type: "spring",
+    stiffness: 260,
+    damping: 30,
+    restDelta: 0.001
+};
+
 const vaultVariants = {
-    hidden: { opacity: 0, scale: 0.9, filter: "blur(40px)" },
+    hidden: { opacity: 0, scale: 0.98, filter: "blur(20px)", y: 20 },
     visible: {
         opacity: 1,
         scale: 1,
         filter: "blur(0px)",
-        transition: { duration: 1, ease: [0.23, 1, 0.32, 1] }
+        y: 0,
+        transition: springTransition
     },
     exit: {
         opacity: 0,
-        scale: 1.1,
-        filter: "blur(20px)",
-        transition: { duration: 0.8 }
+        scale: 1.02,
+        filter: "blur(10px)",
+        transition: { duration: 0.4 }
     }
 };
 
 const inputVariants = {
-    focus: { scale: 1.02, borderColor: "var(--aurora-1)", boxShadow: "0 0 20px rgba(99, 102, 241, 0.2)" },
+    focus: { scale: 1, borderColor: "var(--aurora-1)", boxShadow: "0 0 0 3px rgba(59, 130, 246, 0.1)" },
     blur: { scale: 1, borderColor: "var(--acrylic-border)", boxShadow: "none" }
 };
 
@@ -75,10 +83,10 @@ function Auth() {
                         exit="exit"
                     >
                         <div className="vault-header">
-                            <span className="vault-tag">{isLogin ? 'Secure Access' : 'New Identity'}</span>
+                            <span className="vault-tag">{isLogin ? 'Welcome Back' : 'Get Started'}</span>
                             <h1 className="display-text small">
-                                {isLogin ? 'Identity' : 'Creation'} <br />
-                                <span className="ethereal-gradient">{isLogin ? 'Vault' : 'Gateway'}</span>
+                                {isLogin ? 'Sign In to' : 'Create Your'} <br />
+                                <span className="ethereal-gradient">{isLogin ? 'Your Account' : 'New Account'}</span>
                             </h1>
                         </div>
 
@@ -88,7 +96,7 @@ function Auth() {
                                 <motion.input
                                     type="email"
                                     name="email"
-                                    placeholder="user@network.com"
+                                    placeholder="your@email.com"
                                     onChange={handleChange}
                                     variants={inputVariants}
                                     whileFocus="focus"
@@ -102,7 +110,7 @@ function Auth() {
                                     <motion.input
                                         type="text"
                                         name="username"
-                                        placeholder="DESIGNATOR"
+                                        placeholder="Username"
                                         onChange={handleChange}
                                         variants={inputVariants}
                                         whileFocus="focus"
@@ -112,7 +120,7 @@ function Auth() {
                             )}
 
                             <div className="input-field">
-                                <label>Access Key</label>
+                                <label>Password</label>
                                 <motion.input
                                     type="password"
                                     name="password"
@@ -135,13 +143,13 @@ function Auth() {
                             )}
 
                             <button className="btn-master full-width" disabled={isLoading}>
-                                {isLoading ? 'Authenticating...' : (isLogin ? 'Establish Connection' : 'Register Identity')}
+                                {isLoading ? 'Authenticating...' : (isLogin ? 'Sign In' : 'Create Account')}
                             </button>
                         </form>
 
                         <div className="vault-footer">
                             <button className="switch-btn" onClick={() => setIsLogin(!isLogin)}>
-                                {isLogin ? "Need a new designator? Create ID" : "Already registered? Login"}
+                                {isLogin ? "Don't have an account? Sign Up" : "Already have an account? Sign In"}
                             </button>
                         </div>
                     </motion.div>

@@ -24,14 +24,14 @@
 
 .tag {
     font-size: 0.75rem;
-    font-weight: 800;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.3em;
-    color: var(--aurora-1);
-    background: rgba(99, 102, 241, 0.1);
+    letter-spacing: 0.1em;
+    color: var(--aurora-4);
+    background: rgba(255, 255, 255, 0.03);
     padding: 0.5rem 1rem;
-    border-radius: var(--radius-circle);
-    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 8px;
+    border: 1px solid var(--acrylic-border);
 }
 
 .display-text {
@@ -49,10 +49,11 @@
 }
 
 .ethereal-gradient {
-    background: linear-gradient(135deg, #fff 0%, var(--aurora-1) 50%, var(--aurora-2) 100%);
+    background: linear-gradient(135deg, white 0%, var(--aurora-1) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    display: inline-block;
 }
 
 .lead-text {
@@ -69,12 +70,12 @@
 }
 
 .btn-master {
-    padding: 1.25rem 3rem;
-    font-family: var(--font-display);
+    padding: 1rem 2.5rem;
+    font-family: var(--font-interface);
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.95rem;
     border-radius: var(--radius-lg);
-    transition: var(--transition-ultra);
+    transition: var(--transition-fluid);
     cursor: pointer;
     text-decoration: none;
     display: inline-flex;
@@ -83,109 +84,125 @@
 }
 
 .btn-master.outline {
-    background: white;
-    color: black;
+    background: var(--aurora-1);
+    color: white;
     border: none;
 }
 
 .btn-master.outline:hover {
-    transform: scale(1.05);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    background: #1e3a8a;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
 }
 
 .btn-master.ghost {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.03);
     color: white;
     border: 1px solid var(--acrylic-border);
-    backdrop-filter: blur(10px);
 }
 
 .btn-master.ghost:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.08);
 }
 
-.hero-scroll-indicator {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    justify-content: center;
+
+/* Modern Bento Grid */
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
 }
 
-.mouse-wheel {
-    width: 24px;
-    height: 40px;
-    border: 2px solid var(--text-ghost);
-    border-radius: 12px;
-    position: relative;
+.section-header .display-text {
+    margin-bottom: 0;
 }
 
-.mouse-wheel::after {
-    content: "";
-    position: absolute;
-    top: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 4px;
-    height: 8px;
-    background: white;
-    border-radius: 2px;
-}
-
-/* Editorial Section */
-.editorial-section {
-    padding: 10rem 0;
-}
-
-.editorial-grid {
+.bento-grid {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    grid-template-rows: auto auto;
-    gap: 2rem;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 300px;
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.item-large {
-    grid-row: span 2;
-    padding: 5rem;
+.bento-item {
+    padding: 2.5rem;
     border-radius: var(--radius-xl);
     position: relative;
     overflow: hidden;
+    transition: box-shadow 0.3s ease;
+    transform-style: preserve-3d;
 }
 
-.item-large h2 {
-    font-size: 3.5rem;
-    line-height: 1.1;
-    margin: 2rem 0;
+.shine-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    transition: opacity 0.5s ease;
 }
 
-.item-tag {
-    font-size: 0.8rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    color: var(--aurora-1);
-    letter-spacing: 0.2em;
+.bento-item:hover {
+    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.8);
 }
 
-.item-column {
+.item-main {
+    grid-column: span 2;
+    grid-row: span 2;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    justify-content: flex-end;
 }
 
-.item-small {
-    padding: 3rem;
-    flex: 1;
+.item-main h2 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
 }
 
-.item-small h3 {
-    font-size: 1.75rem;
-    margin-bottom: 1rem;
+.item-main p {
+    font-size: 1.1rem;
+    color: var(--text-ethereal);
+    max-width: 400px;
+}
+
+.bento-visual {
+    position: absolute;
+    top: 2.5rem;
+    right: 2.5rem;
+    width: 200px;
+    height: 200px;
+    opacity: 0.1;
+}
+
+.grid-pattern {
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle, white 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+.item-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.icon-box {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.item-side h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
 }
 
 .item-wide {
-    grid-column: span 2;
-    padding: 4rem;
+    grid-column: span 3;
+    padding: 3rem 4rem;
 }
 
 .wide-content {
@@ -196,11 +213,16 @@
 
 .wide-content h2 {
     font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.wide-content p {
+    color: var(--text-ghost);
 }
 
 .floating-svg {
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 120px;
     animation: rotate 20s linear infinite;
 }
 
@@ -217,7 +239,7 @@
 /* Data Atmosphere */
 .data-atmosphere {
     padding: 10rem 0;
-    background: linear-gradient(to bottom, transparent, rgba(99, 102, 241, 0.05), transparent);
+    background: linear-gradient(to bottom, transparent, rgba(30, 41, 59, 0.1), transparent);
 }
 
 .stats-editorial {
@@ -260,34 +282,44 @@
 
 .btn-master.full-width {
     width: 100%;
-    margin-top: 3rem;
+    margin-top: 2rem;
     background: var(--aurora-1);
     color: white;
     border: none;
-    font-size: 1.25rem;
+    font-size: 1.1rem;
 }
 
 @media (max-width: 1024px) {
-    .editorial-grid {
-        grid-template-columns: 1fr;
+    .bento-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: minmax(280px, auto);
     }
 
-    .item-large {
-        grid-row: auto;
+    .item-main {
+        grid-column: span 2;
     }
 
     .item-wide {
-        grid-column: auto;
+        grid-column: span 2;
     }
 }
 
 @media (max-width: 768px) {
+    .bento-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .item-main,
+    .item-wide {
+        grid-column: span 1;
+    }
+
+    .item-main h2 {
+        font-size: 2.5rem;
+    }
+
     .stats-editorial {
         flex-direction: column;
         gap: 3rem;
-    }
-
-    .item-large h2 {
-        font-size: 2.5rem;
     }
 }

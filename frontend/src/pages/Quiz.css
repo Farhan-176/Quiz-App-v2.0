@@ -13,7 +13,7 @@
     padding: 6rem 0;
 }
 
-/* Atmospheric Timer */
+/* Subtle Background Indicators */
 .atmospheric-timer {
     position: fixed;
     top: 0;
@@ -23,7 +23,7 @@
     pointer-events: none;
     z-index: -1;
     transition: var(--transition-ultra);
-    opacity: 0.3;
+    opacity: 0.15;
 }
 
 .atmospheric-timer.safe {
@@ -76,13 +76,12 @@
 }
 
 .heart.active {
-    color: var(--aurora-3);
-    text-shadow: 0 0 10px var(--aurora-3);
+    color: #ef4444;
 }
 
 .heart.depleted {
-    opacity: 0.2;
-    transform: scale(0.8);
+    opacity: 0.1;
+    transform: scale(0.9);
 }
 
 .zen-progress-bar {
@@ -159,30 +158,30 @@
 }
 
 .zen-option.selected {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: white;
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--aurora-1);
 }
 
 .zen-option.correct {
-    border-color: #10b981;
-    background: rgba(16, 185, 129, 0.1);
+    border-color: #059669;
+    background: rgba(5, 150, 105, 0.05);
 }
 
 .zen-option.correct .opt-indicator {
-    background: #10b981;
+    background: #059669;
     color: white;
-    border-color: #10b981;
+    border-color: #059669;
 }
 
 .zen-option.incorrect {
-    border-color: #ef4444;
-    background: rgba(239, 68, 68, 0.1);
+    border-color: #dc2626;
+    background: rgba(220, 38, 38, 0.05);
 }
 
 .zen-option.incorrect .opt-indicator {
-    background: #ef4444;
+    background: #dc2626;
     color: white;
-    border-color: #ef4444;
+    border-color: #dc2626;
 }
 
 .zen-option.dimmed {
@@ -215,15 +214,6 @@
     font-weight: 500;
 }
 
-.selection-glow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.05), transparent);
-    pointer-events: none;
-}
 
 .zen-footer {
     margin-top: 4rem;

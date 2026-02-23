@@ -43,6 +43,18 @@
     color: white;
 }
 
+.logo-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--aurora-1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: white;
+}
+
 .logo-text {
     background: linear-gradient(135deg, white 0%, var(--text-ghost) 100%);
     -webkit-background-clip: text;
@@ -96,7 +108,7 @@
     padding: 0.4rem 0.75rem 0.4rem 0.6rem;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--acrylic-border);
-    border-radius: var(--radius-circle);
+    border-radius: 100px;
     cursor: pointer;
     transition: var(--transition-fluid);
     user-select: none;
@@ -123,9 +135,9 @@
 .user-avatar {
     width: 28px;
     height: 28px;
-    background: white;
-    color: black;
-    border-radius: 50%;
+    background: var(--aurora-1);
+    color: white;
+    border-radius: var(--radius-circle);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -145,25 +157,24 @@
     text-transform: uppercase;
     color: #fff;
     text-decoration: none;
-    background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-    border-radius: 50px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 16px rgba(99, 102, 241, 0.45), 0 4px 12px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    background: var(--aurora-1);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: var(--transition-fluid);
     cursor: pointer;
     white-space: nowrap;
 }
 
 .btn-premium:hover {
-    background: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
-    box-shadow: 0 0 28px rgba(99, 102, 241, 0.7), 0 6px 20px rgba(0, 0, 0, 0.4);
-    transform: translateY(-1px) scale(1.03);
+    background: #1e3a8a;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    transform: translateY(-1px);
     color: #fff;
 }
 
 .btn-premium:active {
-    transform: translateY(0) scale(0.98);
-    box-shadow: 0 0 12px rgba(99, 102, 241, 0.4);
+    transform: translateY(0);
 }
 
 .btn-small {
@@ -205,8 +216,8 @@
 .dropdown-avatar {
     width: 36px;
     height: 36px;
-    background: linear-gradient(135deg, #6366f1, #a855f7);
-    border-radius: 50%;
+    background: var(--aurora-1);
+    border-radius: var(--radius-circle);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -252,8 +263,8 @@
 }
 
 .dropdown-item.signout:hover {
-    background: rgba(244, 63, 94, 0.12);
-    color: #f43f5e;
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
 }
 
 @media (max-width: 768px) {

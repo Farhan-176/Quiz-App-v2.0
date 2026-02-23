@@ -6,19 +6,33 @@ import confetti from 'canvas-confetti';
 import Navbar from '../components/Navbar';
 import './Result.css';
 
+const springTransition = {
+    type: "spring",
+    stiffness: 260,
+    damping: 30,
+    restDelta: 0.001
+};
+
 const victoryVariants = {
-    hidden: { opacity: 0, scale: 0.8, filter: "blur(20px)" },
+    hidden: { opacity: 0, scale: 0.95, filter: "blur(15px)" },
     visible: {
         opacity: 1,
         scale: 1,
         filter: "blur(0px)",
-        transition: { duration: 1, ease: [0.23, 1, 0.32, 1], staggerChildren: 0.2 }
+        transition: {
+            staggerChildren: 0.1,
+            ...springTransition
+        }
     }
 };
 
 const itemFade = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.23, 1, 0.32, 1] } }
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: springTransition
+    }
 };
 
 function Result() {
@@ -73,11 +87,11 @@ function Result() {
     const percentage = Math.round((score / total) * 100);
 
     const getMasteryLevel = () => {
-        if (remainingLives === 0) return { title: "System Failure", tag: "Critical", icon: "⚠️" };
-        if (percentage >= 90) return { title: "Omniscient Master", tag: "Ascended", icon: "👁️" };
-        if (percentage >= 75) return { title: "Grand Strategist", tag: "Elite", icon: "⚔️" };
-        if (percentage >= 60) return { title: "Adept Scholar", tag: "Stable", icon: "📚" };
-        return { title: "Novice Initiate", tag: "Learning", icon: "🌱" };
+        if (remainingLives === 0) return { title: "Assessment Ended", tag: "Incomplete", icon: "📋" };
+        if (percentage >= 90) return { title: "Outstanding Performance", tag: "Expert", icon: "🏆" };
+        if (percentage >= 75) return { title: "Excellent Work", tag: "Advanced", icon: "⭐" };
+        if (percentage >= 60) return { title: "Good Progress", tag: "Proficient", icon: "✅" };
+        return { title: "Keep Learning", tag: "Beginner", icon: "📖" };
     };
 
     const mastery = getMasteryLevel();
@@ -95,7 +109,7 @@ function Result() {
                 >
                     <motion.div className="reel-header" variants={itemFade}>
                         <span className={`reel-tag ${remainingLives === 0 ? 'critical' : ''}`}>
-                            {remainingLives === 0 ? 'Forced Termination' : 'Assessment Concluded'}
+                            {remainingLives === 0 ? 'Assessment Terminated early' : 'Results Summary'}
                         </span>
                         <h1 className="display-text small centered">
                             {mastery.title} <br />
@@ -124,11 +138,11 @@ function Result() {
                         <div className="metrics-track">
                             <div className="track-item acrylic">
                                 <span className="v">{remainingLives}/3</span>
-                                <span className="l">Sync Stability</span>
+                                <span className="l">Remaining Hearts</span>
                             </div>
                             <div className="track-item acrylic">
                                 <span className="v">{score}/{total}</span>
-                                <span className="l">Nodes Resolved</span>
+                                <span className="l">Correct Answers</span>
                             </div>
                             <div className="track-item achievement acrylic">
                                 <span className="icon">{mastery.icon}</span>
@@ -138,13 +152,13 @@ function Result() {
                     </motion.div>
 
                     <motion.div className="victory-actions" variants={itemFade}>
-                        <Link to="/quiz" className="btn-master outline">Re-Initialize Session</Link>
-                        <Link to="/" className="btn-master ghost">Back to Terminal</Link>
+                        <Link to="/quiz" className="btn-master outline">Try Again</Link>
+                        <Link to="/" className="btn-master ghost">Home Dashboard</Link>
                     </motion.div>
                 </motion.section>
 
                 <section className="analytical-review">
-                    <h2 className="display-text xsmall centered">Data Node <span className="ethereal-gradient">Review</span></h2>
+                    <h2 className="display-text xsmall centered">Question <span className="ethereal-gradient">Analysis</span></h2>
 
                     <div className="review-stream">
                         {questions.map((q, i) => {
@@ -161,21 +175,21 @@ function Result() {
                                     transition={{ delay: i * 0.1 }}
                                 >
                                     <div className="node-header">
-                                        <span className="node-code">NODE_0{i + 1}</span>
+                                        <span className="node-code">Question {i + 1}</span>
                                         <span className="node-status">
-                                            {isCorrect ? 'STABLE' : isSkipped ? 'TIMED OUT' : 'ANOMALY'}
+                                            {isCorrect ? 'CORRECT' : isSkipped ? 'TIMED OUT' : 'INCORRECT'}
                                         </span>
                                     </div>
                                     <h3>{q.question}</h3>
                                     <div className="node-compare">
                                         <div className="input-block">
-                                            <label>Your Input</label>
+                                            <label>Your Choice</label>
                                             <span className={isCorrect ? 'text-correct' : 'text-incorrect'}>
-                                                {isSkipped ? 'NO SIGNAL' : q.options[userAnswers[i]]}
+                                                {isSkipped ? 'NO ANSWER' : q.options[userAnswers[i]]}
                                             </span>
                                         </div>
                                         <div className="target-block">
-                                            <label>Correct Vector</label>
+                                            <label>Correct Answer</label>
                                             <span>{q.options[q.correctIndex]}</span>
                                         </div>
                                     </div>

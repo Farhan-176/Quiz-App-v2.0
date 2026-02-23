@@ -5,10 +5,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import './Quiz.css';
 
+const springTransition = {
+    type: "spring",
+    stiffness: 260,
+    damping: 30,
+    restDelta: 0.001
+};
+
 const questionVariants = {
-    initial: { opacity: 0, y: 20, filter: "blur(10px)" },
-    animate: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.8, ease: [0.23, 1, 0.32, 1] } },
-    exit: { opacity: 0, scale: 0.95, filter: "blur(10px)", transition: { duration: 0.5 } }
+    initial: { opacity: 0, y: 30, filter: "blur(10px)" },
+    animate: { opacity: 1, y: 0, filter: "blur(0px)", transition: springTransition },
+    exit: { opacity: 0, scale: 0.98, filter: "blur(10px)", transition: { duration: 0.4 } }
 };
 
 function Quiz() {
@@ -125,7 +132,7 @@ function Quiz() {
 
     if (isLoading) return (
         <div className="quiz-zen-wrapper flex-center">
-            <div className="zen-loader">Synchronizing Cognitive Channels...</div>
+            <div className="zen-loader">Loading Quiz Questions...</div>
         </div>
     );
 
@@ -154,7 +161,7 @@ function Quiz() {
                             ))}
                         </div>
                         <div className="zen-meta">
-                            <span className="q-count">Phase {currentIdx + 1} / {questions.length}</span>
+                            <span className="q-count">Question {currentIdx + 1} of {questions.length}</span>
                             <span className="time-display">{timer}s</span>
                         </div>
                     </div>
@@ -197,19 +204,12 @@ function Quiz() {
                                         key={idx}
                                         className={`zen-option ${isSelected ? 'selected' : ''} ${statusClass}`}
                                         onClick={() => handleAnswer(idx)}
-                                        whileHover={!isAnswered ? { scale: 1.02, backgroundColor: 'rgba(255,255,255,0.05)' } : {}}
+                                        whileHover={!isAnswered ? { scale: 1.01, backgroundColor: 'rgba(255,255,255,0.06)' } : {}}
                                         whileTap={!isAnswered ? { scale: 0.98 } : {}}
+                                        transition={springTransition}
                                     >
                                         <span className="opt-indicator">{idx + 1}</span>
                                         <span className="opt-text">{option}</span>
-                                        {isSelected && (
-                                            <motion.div
-                                                className="selection-glow"
-                                                layoutId="glow"
-                                                initial={{ opacity: 0 }}
-                                                animate={{ opacity: 1 }}
-                                            />
-                                        )}
                                     </motion.div>
                                 );
                             })}

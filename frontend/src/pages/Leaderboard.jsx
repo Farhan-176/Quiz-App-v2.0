@@ -4,17 +4,33 @@ import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import './Leaderboard.css';
 
+const springTransition = {
+    type: "spring",
+    stiffness: 260,
+    damping: 30,
+    restDelta: 0.001
+};
+
 const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,
-        transition: { staggerChildren: 0.1, delayChildren: 0.3 }
+        transition: {
+            staggerChildren: 0.05,
+            delayChildren: 0.2,
+            ...springTransition
+        }
     }
 };
 
 const itemVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: [0.23, 1, 0.32, 1] } }
+    hidden: { opacity: 0, x: -30, filter: "blur(10px)" },
+    visible: {
+        opacity: 1,
+        x: 0,
+        filter: "blur(0px)",
+        transition: springTransition
+    }
 };
 
 function Leaderboard() {
@@ -41,12 +57,12 @@ function Leaderboard() {
 
             <main className="leaderboard-main container">
                 <header className="leader-header">
-                    <span className="tag">Global Ranking</span>
-                    <h1 className="display-text small centered">Masterclass <span className="ethereal-gradient">Elite</span></h1>
+                    <span className="tag">Global Rankings</span>
+                    <h1 className="display-text small centered">Top <span className="ethereal-gradient">Performers</span></h1>
                 </header>
 
                 {isLoading ? (
-                    <div className="zen-loader">Deciphering Rank Records...</div>
+                    <div className="zen-loader">Loading Leaderboard...</div>
                 ) : (
                     <motion.div
                         className="leaderboard-table acrylic"
@@ -56,9 +72,9 @@ function Leaderboard() {
                     >
                         <div className="table-header">
                             <span className="col-rank">Rank</span>
-                            <span className="col-user">Identity</span>
-                            <span className="col-score">Mastery</span>
-                            <span className="col-percentage">Sync Index</span>
+                            <span className="col-user">User</span>
+                            <span className="col-score">Score</span>
+                            <span className="col-percentage">Accuracy</span>
                         </div>
 
                         {leaders.length > 0 ? (
@@ -75,7 +91,7 @@ function Leaderboard() {
                                 </motion.div>
                             ))
                         ) : (
-                            <div className="empty-state">No mastery records found in this sector.</div>
+                            <div className="empty-state">No records found.</div>
                         )}
                     </motion.div>
                 )}

@@ -5,14 +5,14 @@ import Quiz from './pages/Quiz';
 import Result from './pages/Result';
 import Leaderboard from './pages/Leaderboard';
 import AuroraBackground from './components/AuroraBackground';
-import CustomCursor from './components/CustomCursor';
+
 import './App.css';
 
 function App() {
   return (
     <div className="app-shell">
       <AuroraBackground />
-      <CustomCursor />
+
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
