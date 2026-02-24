@@ -21,11 +21,19 @@ const saveLeaderboard = (data) => {
     fs.writeFileSync(leaderboardFilePath, JSON.stringify(data, null, 2));
 };
 
-// Get all quiz questions
+// Get randomized 15 quiz questions
 router.get('/', (req, res) => {
     try {
-        const questions = getQuizzes();
-        res.json(questions);
+        let questions = getQuizzes();
+
+        // Shuffle questions using Fisher-Yates algorithm
+        for (let i = questions.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [questions[i], questions[j]] = [questions[j], questions[i]];
+        }
+
+        // Return up to 15 questions
+        res.json(questions.slice(0, 15));
     } catch (err) {
         console.error(err);
         res.status(500).send('Server error');

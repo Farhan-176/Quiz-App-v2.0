@@ -10,7 +10,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 6rem 0;
+    padding: 3rem 0;
+    /* Reduced from 6rem */
 }
 
 /* Subtle Background Indicators */
@@ -54,14 +55,16 @@
 
 /* Zen Elements */
 .zen-header {
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
+    /* Reduced from 3rem */
 }
 
 .header-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+    /* Reduced from 2rem */
 }
 
 .lives-display {
@@ -88,7 +91,8 @@
     height: 2px;
     background: rgba(255, 255, 255, 0.05);
     width: 100%;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+    /* Reduced from 2rem */
     overflow: hidden;
 }
 
@@ -128,37 +132,47 @@
 
 .display-text.centered {
     text-align: center;
-    margin-bottom: 5rem;
+    margin-bottom: 2rem;
+    /* Reduced from 3rem */
+    font-size: 2.5rem;
+    /* Explicitly set to a smaller size */
+    line-height: 1.2;
 }
 
 .zen-options-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    gap: 1rem;
+    /* Reduced from 1.5rem */
     max-width: 1000px;
     margin: 0 auto;
 }
 
 .zen-option {
-    padding: 2.5rem;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid var(--acrylic-border);
+    padding: 1.5rem 2rem;
+    /* Reduced from 2.5rem */
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-lg);
     cursor: pointer;
     position: relative;
     overflow: hidden;
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
+    /* Reduced from 2rem */
     transition: var(--transition-fluid);
 }
 
 .zen-option:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .zen-option.selected {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(79, 70, 229, 0.2);
+    /* Tint of indigo */
     border-color: var(--aurora-1);
 }
 
@@ -216,11 +230,13 @@
 
 
 .zen-footer {
-    margin-top: 4rem;
+    margin-top: 2rem;
+    /* Reduced from 4rem */
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
+    /* Reduced from 2rem */
 }
 
 .keyboard-hint {

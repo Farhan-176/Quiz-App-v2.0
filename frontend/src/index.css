@@ -1,25 +1,28 @@
 :root {
-  /* Professional Slate Design System - v1.0 */
+  /* Vibrant Ocean/Indigo Design System - v2.0 */
 
-  /* The Foundation (Bespoke Midnight Base) */
-  --void-deep: #020617;
-  --void-surface: #0f172a;
-  --void-card: rgba(15, 23, 42, 0.4);
+  /* The Foundation (Deep Blue Base) */
+  --void-deep: #0f172a;
+  /* Lighter than #020617 */
+  --void-surface: #1e293b;
+  /* Lighter surface */
+  --void-card: rgba(30, 41, 59, 0.6);
+  /* Slightly more opaque */
 
-  /* Primary & Accent Tones (Steel Blue / Refined Slate) */
-  --aurora-1: #1e40af;
-  /* Deep Blue */
-  --aurora-2: #475569;
-  /* Slate-600 */
-  --aurora-3: #64748b;
-  /* Slate-500 */
-  --aurora-4: #94a3b8;
-  /* Slate-400 */
+  /* Primary & Accent Tones (Vibrant Indigo/Violet) */
+  --aurora-1: #4f46e5;
+  /* Indigo */
+  --aurora-2: #6366f1;
+  /* Lighter Indigo */
+  --aurora-3: #8b5cf6;
+  /* Violet */
+  --aurora-4: #a78bfa;
+  /* Light Violet */
 
   /* Text & Contrast */
-  --text-pure: #f8fafc;
-  --text-ethereal: rgba(248, 250, 252, 0.8);
-  --text-ghost: rgba(248, 250, 252, 0.5);
+  --text-pure: #ffffff;
+  --text-ethereal: rgba(255, 255, 255, 0.9);
+  --text-ghost: rgba(255, 255, 255, 0.6);
 
   /* Precise Glass (Premium UI) */
   --acrylic-bg: rgba(15, 23, 42, 0.7);
