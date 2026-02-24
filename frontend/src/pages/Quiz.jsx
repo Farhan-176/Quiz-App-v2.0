@@ -85,22 +85,14 @@ function Quiz() {
         const isCorrect = optionIdx === currentQ.correctIndex;
 
         if (!isCorrect) {
-            setLives(prev => {
-                const newLives = prev - 1;
-                if (newLives <= 0) {
-                    setTimeout(() => handleComplete(0), 1000); // Pass 0 as current score if needed, or let handleComplete calculate
-                }
-                return newLives;
-            });
+            setLives(prev => Math.max(0, prev - 1));
         }
 
         setAnswers({ ...answers, [currentIdx]: optionIdx });
 
         // Auto-advance after delay
         setTimeout(() => {
-            if (lives > 0 || isCorrect) {
-                handleNext();
-            }
+            handleNext();
         }, 1500);
     };
 

@@ -71,7 +71,7 @@ function Result() {
         };
         submitScore();
 
-        if (percentage >= 60 && remainingLives > 0) {
+        if (percentage >= 60) {
             confetti({
                 particleCount: 150,
                 spread: 70,
@@ -87,7 +87,6 @@ function Result() {
     const percentage = Math.round((score / total) * 100);
 
     const getMasteryLevel = () => {
-        if (remainingLives === 0) return { title: "Assessment Ended", tag: "Incomplete", icon: "📋" };
         if (percentage >= 90) return { title: "Outstanding Performance", tag: "Expert", icon: "🏆" };
         if (percentage >= 75) return { title: "Excellent Work", tag: "Advanced", icon: "⭐" };
         if (percentage >= 60) return { title: "Good Progress", tag: "Proficient", icon: "✅" };
@@ -108,8 +107,8 @@ function Result() {
                     animate="visible"
                 >
                     <motion.div className="reel-header" variants={itemFade}>
-                        <span className={`reel-tag ${remainingLives === 0 ? 'critical' : ''}`}>
-                            {remainingLives === 0 ? 'Assessment Terminated early' : 'Results Summary'}
+                        <span className="reel-tag">
+                            Results Summary
                         </span>
                         <h1 className="display-text small centered">
                             {mastery.title} <br />
@@ -122,7 +121,7 @@ function Result() {
                             <svg viewBox="0 0 100 100">
                                 <circle className="bg" cx="50" cy="50" r="45" />
                                 <motion.circle
-                                    className={`progress ${remainingLives === 0 ? 'fail' : ''}`}
+                                    className="progress"
                                     cx="50" cy="50" r="45"
                                     initial={{ strokeDasharray: "0 283" }}
                                     animate={{ strokeDasharray: `${(percentage / 100) * 283} 283` }}
