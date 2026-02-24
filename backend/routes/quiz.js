@@ -32,7 +32,7 @@ router.get('/', (req, res) => {
             [questions[i], questions[j]] = [questions[j], questions[i]];
         }
 
-        // Return up to 15 questions
+        // Return 15 randomized questions from the pool
         res.json(questions.slice(0, 15));
     } catch (err) {
         console.error(err);
