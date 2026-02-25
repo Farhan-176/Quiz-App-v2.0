@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { quiz } from '../lib/supabase';
 import Navbar from '../components/Navbar';
 import './Quiz.css';
 
@@ -32,14 +32,16 @@ function Quiz() {
     useEffect(() => {
         const fetchQuiz = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/quiz');
-                // The backend returns an array of questions directly
-                if (Array.isArray(response.data)) {
-                    setQuestions(response.data);
-                } else if (response.data.questions) {
-                    // Fallback for wrapped object structure
-                    setQuestions(response.data.questions);
-                }
+                const data = await quiz.getQuestions();
+                // Transform Supabase data to match expected format
+                const formattedQuestions = data.map(q => ({
+                    id: q.id.toString(),
+                    question: q.question,
+                    options: typeof q.options === 'string' ? JSON.parse(q.options) : q.options,
+                    correctIndex: q.correct_index,
+                    category: q.category
+                }));
+                setQuestions(formattedQuestions);
                 setIsLoading(false);
             } catch (err) {
                 console.error('Failed to fetch quiz', err);
