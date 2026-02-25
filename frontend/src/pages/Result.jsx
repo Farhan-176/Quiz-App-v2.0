@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
+import { quiz } from '../lib/supabase';
 import Navbar from '../components/Navbar';
 import './Result.css';
 
@@ -59,12 +59,7 @@ function Result() {
         // Submit score to leaderboard
         const submitScore = async () => {
             try {
-                await axios.post('http://localhost:5000/api/quiz/submit-score', {
-                    username,
-                    score,
-                    total,
-                    percentage
-                });
+                await quiz.submitScore(username, score, total, percentage);
             } catch (err) {
                 console.error('Failed to submit score', err);
             }
