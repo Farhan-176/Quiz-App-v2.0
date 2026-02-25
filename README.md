@@ -1,41 +1,60 @@
 # Quiz App v2.0.0
 
-A modern, fully functional quiz application with a sleek React frontend and a lightweight Express API. Built for smooth UX, fast loads, and easy local setup.
+A modern, fully functional quiz application with a sleek React frontend and Supabase backend. Built for smooth UX, fast loads, and **free deployment** (no credit card needed). 🚀
 
 ## Live Demo
 
 TAKE QUIZ AT: https://quiz-app-176.netlify.app/
 
+## ✨ Latest Update (Supabase Integration)
+
+**What's New:**
+- ✅ Replaced Express backend with Supabase (free, no credit card)
+- ✅ Serverless architecture - deploy frontend only
+- ✅ PostgreSQL database instead of JSON files
+- ✅ Built-in authentication and real-time updates
+- ✅ Deploy to Vercel in minutes
+
+**Quick Deploy:** See [QUICKSTART.md](./QUICKSTART.md) for 15-minute setup guide.
+
 ## Highlights
 
 - React 19 + Vite frontend with animated UI
-- Express API for auth and quiz data
+- Supabase backend (auth, database, API)
 - JWT-based authentication
-- JSON file storage (no database required)
-- Leaderboard support
+- PostgreSQL database with 100+ quiz questions
+- Real-time leaderboard
 - Responsive layout for mobile and desktop
+- **100% free hosting** (Vercel + Supabase)
 
 ## Tech Stack
 
 Frontend:
-- React
+- React 19
 - Vite
 - Framer Motion
 - React Router DOM
-- Axios
+- Supabase JS Client
 
 Backend:
-- Node.js
-- Express
-- JSON storage
-- JWT
-- Bcryptjs
-- CORS
+- Supabase (PostgreSQL database)
+- Supabase Auth (JWT authentication)
+- Supabase API (auto-generated REST API)
+
+Hosting:
+- Vercel (frontend)
+- Supabase (backend - free tier)
 
 ## Quick Start
 
+### Option 1: Deploy (Recommended - 15 minutes)
+See [QUICKSTART.md](./QUICKSTART.md) for step-by-step deployment guide.
+
+### Option 2: Local Development
+
 Prerequisites:
 - Node.js 14+
+- Supabase account (free, no card)
 
 1) Clone
 ```bash
@@ -43,57 +62,61 @@ git clone https://github.com/Farhan-176/Quiz-App-v2.0.git
 cd quiz app
 ```
 
-2) Install
-```bash
-# Backend
-cd backend
-npm install
-cd ..
+2) Set up Supabase
+- Follow [SUPABASE_SETUP.md](./SUPABASE_SETUP.md) to create your project
+- Run migration script: `node scripts/migrate-quizzes.js`
+- Copy SQL output to Supabase SQL Editor and run
 
-# Frontend
+3) Configure Frontend
+```bash
+cd frontend
+cp .env.example .env
+# Edit .env with your Supabase credentials
+```
+
+4) Install & Run
+```bash
 cd frontend
 npm install
-cd ..
-```
-
-3) Configure (backend/.env)
-```
-JWT_SECRET=your_jwt_secret
-PORT=5000
-```
-
-4) Run
-```bash
-# Terminal 1
-cd backend
-npm start
-
-# Terminal 2
-cd frontend
 npm run dev
 ```
+
+Open http://localhost:5174 and start quizzing! 🎯
 
 ## Project Structure
 
 ```
 quiz app/
-├── backend/
-│   ├── routes/
-│   ├── data/
-│   ├── server.js
+├── frontend/
+│   ├── src/
+│   │   ├── components/     # Reusable UI components
+│   │   ├── pages/          # Route pages (Auth, Quiz, Result, etc.)
+│   │   ├── lib/
+│   │   │   └── supabase.js # Supabase client & helper functions
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   ├── .env                # Supabase credentials (not in git)
+│   ├── .env.example        # Template for .env
 │   └── package.json
-└── frontend/
-    ├── src/
-    │   ├── components/
-    │   ├── pages/
-    │   ├── App.jsx
-    │   └── main.jsx
-    ├── vite.config.js
-    └── package.json
+├── backend/                # Legacy (keeping for reference/migration)
+│   └── data/
+│       └── quizzes.json    # Source data for migration
+├── scripts/
+│   └── migrate-quizzes.js  # SQL generator for Supabase
+├── QUICKSTART.md           # 15-min deployment guide
+├── SUPABASE_SETUP.md       # Detailed Supabase setup
+└── DEPLOYMENT.md           # Full deployment docs
 ```
+
+## Documentation
+
+- 🚀 **[QUICKSTART.md](./QUICKSTART.md)** - Deploy in 15 minutes
+- 📖 **[SUPABASE_SETUP.md](./SUPABASE_SETUP.md)** - Database setup guide
+- 🚢 **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Complete deployment reference
 
 ## Version History
 
+- v2.1.0 - Supabase integration, serverless architecture
 - v2.0.0 - React rewrite, modern animations, backend split
 - v1.0.0 - Legacy version (see https://github.com/Farhan-176/Quiz-App)
 
