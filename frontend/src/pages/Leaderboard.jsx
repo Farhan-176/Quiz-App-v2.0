@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { motion } from 'framer-motion';
+import { quiz } from '../lib/supabase';
 import Navbar from '../components/Navbar';
 import './Leaderboard.css';
 
@@ -40,8 +40,8 @@ function Leaderboard() {
     useEffect(() => {
         const fetchLeaders = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/quiz/leaderboard');
-                setLeaders(response.data);
+                const data = await quiz.getLeaderboard();
+                setLeaders(data);
                 setIsLoading(false);
             } catch (err) {
                 console.error('Failed to fetch leaderboard', err);
