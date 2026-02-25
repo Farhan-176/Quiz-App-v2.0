@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { auth } from '../lib/supabase';
 import Navbar from '../components/Navbar';
 import './Auth.css';
 
@@ -51,18 +51,35 @@ function Auth() {
         setError('');
 
         try {
-            const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
-            const response = await axios.post(`http://localhost:5000${endpoint}`, formData);
-
-            localStorage.setItem('token', response.data.token);
-            localStorage.setItem('currentUser', JSON.stringify({
-                username: response.data.user.username,
-                email: response.data.user.email
-            }));
+            if (isLogin) {
+                // Sign in
+                const { user, session, profile } = await auth.signIn(formData.email, formData.password);
+                
+                localStorage.setItem('token', session.access_token);
+                localStorage.setItem('currentUser', JSON.stringify({
+                    username: profile?.username || formData.email.split('@')[0],
+                    email: formData.email
+                }));
+            } else {
+                // Sign up
+                const { user, session } = await auth.signUp(formData.email, formData.password, formData.username);
+                
+                if (session) {
+                    localStorage.setItem('token', session.access_token);
+                    localStorage.setItem('currentUser', JSON.stringify({
+                        username: formData.username,
+                        email: formData.email
+                    }));
+                } else {
+                    setError('Please check your email to confirm your account.');
+                    setIsLoading(false);
+                    return;
+                }
+            }
 
             navigate('/');
         } catch (err) {
-            setError(err.response?.data?.msg || err.response?.data?.message || 'Authentication failed');
+            setError(err.message || 'Authentication failed');
         } finally {
             setIsLoading(false);
         }
