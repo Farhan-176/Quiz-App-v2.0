@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { quiz } from '../lib/supabase';
+import { getQuizQuestions } from '../lib/quizzesData';
 import Navbar from '../components/Navbar';
 import './Quiz.css';
 
@@ -30,25 +30,10 @@ function Quiz() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchQuiz = async () => {
-            try {
-                const data = await quiz.getQuestions();
-                // Transform Supabase data to match expected format
-                const formattedQuestions = data.map(q => ({
-                    id: q.id.toString(),
-                    question: q.question,
-                    options: typeof q.options === 'string' ? JSON.parse(q.options) : q.options,
-                    correctIndex: q.correct_index,
-                    category: q.category
-                }));
-                setQuestions(formattedQuestions);
-                setIsLoading(false);
-            } catch (err) {
-                console.error('Failed to fetch quiz', err);
-                navigate('/');
-            }
-        };
-        fetchQuiz();
+        // Load questions from local data
+        const data = getQuizQuestions();
+        setQuestions(data);
+        setIsLoading(false);
     }, [navigate]);
 
     // Per-question timer logic
@@ -135,7 +120,7 @@ function Quiz() {
 
     return (
         <div className="quiz-zen-wrapper">
-            <Navbar />
+            <Navbar quizCounter={`QUESTION ${currentIdx + 1} OF ${questions.length}`} timer={timer} />
 
             {/* Atmospheric Timer */}
             <div className={`atmospheric-timer ${timer < 5 ? 'critical' : timer < 10 ? 'warning' : 'safe'}`} />

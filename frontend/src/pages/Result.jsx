@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
-import { quiz } from '../lib/supabase';
 import Navbar from '../components/Navbar';
 import './Result.css';
 
@@ -55,16 +54,6 @@ function Result() {
         setResultData({ questions, userAnswers, username, score, total, remainingLives });
 
         const percentage = Math.round((score / total) * 100);
-
-        // Submit score to leaderboard
-        const submitScore = async () => {
-            try {
-                await quiz.submitScore(username, score, total, percentage);
-            } catch (err) {
-                console.error('Failed to submit score', err);
-            }
-        };
-        submitScore();
 
         if (percentage >= 60) {
             confetti({

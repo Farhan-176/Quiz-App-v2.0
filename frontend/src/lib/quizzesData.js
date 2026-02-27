@@ -1,0 +1,122 @@
+// All 100 quiz questions
+const allQuestions = [
+    {"id":"1","question":"Which language runs in a web browser?","options":["Python","Java","JavaScript","HTML"],"correctIndex":2,"category":"Programming"},
+    {"id":"2","question":"What is the capital of France?","options":["Berlin","Madrid","Paris","Rome"],"correctIndex":2,"category":"Geography"},
+    {"id":"3","question":"Which tag is used for creating a hyperlink?","options":["<link>","<a>","<href>","<h>"],"correctIndex":1,"category":"Web Dev"},
+    {"id":"4","question":"What is 2 + 2?","options":["3","4","5","6"],"correctIndex":1,"category":"Math"},
+    {"id":"5","question":"Which is not a programming language?","options":["Python","HTML","Java","C++"],"correctIndex":1,"category":"Programming"},
+    {"id":"6","question":"What does CSS stand for?","options":["Computer Style Sheets","Creative Style Sheets","Cascading Style Sheets","Colorful Style Sheets"],"correctIndex":2,"category":"Web Dev"},
+    {"id":"7","question":"Who is known as the father of computers?","options":["Charles Babbage","Alan Turing","Tim Berners-Lee","Bill Gates"],"correctIndex":0,"category":"History"},
+    {"id":"8","question":"What is the largest planet in our solar system?","options":["Earth","Mars","Jupiter","Saturn"],"correctIndex":2,"category":"Science"},
+    {"id":"9","question":"Which HTML element is used to define a list item?","options":["<ul>","<ol>","<li>","<dl>"],"correctIndex":2,"category":"Web Dev"},
+    {"id":"10","question":"What is the symbol for Iron on the periodic table?","options":["I","Ir","Fe","In"],"correctIndex":2,"category":"Science"},
+    {"id":"11","question":"What year did the Titanic sink?","options":["1912","1905","1898","1923"],"correctIndex":0,"category":"History"},
+    {"id":"12","question":"In Git, what command is used to save your changes?","options":["git save","git commit","git push","git merge"],"correctIndex":1,"category":"Programming"},
+    {"id":"13","question":"What is the capital of Japan?","options":["Beijing","Seoul","Tokyo","Bangkok"],"correctIndex":2,"category":"Geography"},
+    {"id":"14","question":"If x = 5 and y = 10, what is x * y?","options":["15","50","2","100"],"correctIndex":1,"category":"Math"},
+    {"id":"15","question":"Which framework is used for building UIs in React?","options":["Angular","Vue","React DOM","Django"],"correctIndex":2,"category":"Web Dev"},
+    {"id":"16","question":"What is the smallest prime number?","options":["0","1","2","3"],"correctIndex":2,"category":"Math"},
+    {"id":"17","question":"Which protocol is used to secure data transfer on the web?","options":["HTTP","HTTPS","FTP","SMTP"],"correctIndex":1,"category":"Web Dev"},
+    {"id":"18","question":"Who painted the Mona Lisa?","options":["Vincent van Gogh","Pablo Picasso","Leonardo da Vinci","Claude Monet"],"correctIndex":2,"category":"History"},
+    {"id":"19","question":"What is the hardest natural substance on Earth?","options":["Gold","Iron","Diamond","Quartz"],"correctIndex":2,"category":"Science"},
+    {"id":"20","question":"What does SQL stand for?","options":["Structured Query Language","Stylesheet Query Language","Standard Question Language","System Query Language"],"correctIndex":0,"category":"Programming"},
+    {"id":"21","question":"Which language is primarily used for Android app development?","options":["Swift","Kotlin","Ruby","C#"],"correctIndex":1,"category":"Programming"},
+    {"id":"22","question":"What is the square root of 64?","options":["6","7","8","9"],"correctIndex":2,"category":"Math"},
+    {"id":"23","question":"What does JSON stand for?","options":["JavaScript Object Notation","Java Source Open Network","JavaScript Style Object","Java Standard Output Network"],"correctIndex":0,"category":"Programming"},
+    {"id":"24","question":"Which continent is the Sahara Desert located in?","options":["Asia","North America","Africa","Australia"],"correctIndex":2,"category":"Geography"},
+    {"id":"25","question":"What is the speed of light approximately?","options":["300,000 km/s","150,000 km/s","1,000,000 km/s","50,000 km/s"],"correctIndex":0,"category":"Science"},
+    {"id":"26","question":"Who developed the theory of relativity?","options":["Isaac Newton","Albert Einstein","Nikola Tesla","Galileo Galilei"],"correctIndex":1,"category":"Science"},
+    {"id":"27","question":"Which ocean is the largest on Earth?","options":["Atlantic Ocean","Indian Ocean","Arctic Ocean","Pacific Ocean"],"correctIndex":3,"category":"Geography"},
+    {"id":"28","question":"What does API stand for?","options":["Application Programming Interface","Advanced Program Integration","Application Process Integration","Automated Program Interface"],"correctIndex":0,"category":"Programming"},
+    {"id":"29","question":"What is 15% of 200?","options":["15","20","30","45"],"correctIndex":2,"category":"Math"},
+    {"id":"30","question":"Which part of the computer is considered its brain?","options":["RAM","Motherboard","CPU","Hard Drive"],"correctIndex":2,"category":"Computer Science"},
+    {"id":"31","question":"In which year did World War II end?","options":["1940","1945","1950","1939"],"correctIndex":1,"category":"History"},
+    {"id":"32","question":"Who wrote 'Hamlet'?","options":["Charles Dickens","Leo Tolstoy","William Shakespeare","Mark Twain"],"correctIndex":2,"category":"Literature"},
+    {"id":"33","question":"What is the main building block of a React application?","options":["Modules","Components","Templates","Views"],"correctIndex":1,"category":"Web Dev"},
+    {"id":"34","question":"Which gas is most abundant in the Earth's atmosphere?","options":["Oxygen","Carbon Dioxide","Hydrogen","Nitrogen"],"correctIndex":3,"category":"Science"},
+    {"id":"35","question":"What is the longest river in the world?","options":["Amazon River","Nile River","Yangtze River","Mississippi River"],"correctIndex":1,"category":"Geography"},
+    {"id":"36","question":"What does NPM stand for?","options":["Node Package Manager","Network Protocol Manager","New Project Module","No Problem Message"],"correctIndex":0,"category":"Programming"},
+    {"id":"37","question":"How many degrees are in a full circle?","options":["90","180","270","360"],"correctIndex":3,"category":"Math"},
+    {"id":"38","question":"Which country is home to the kangaroo?","options":["South Africa","Brazil","New Zealand","Australia"],"correctIndex":3,"category":"Geography"},
+    {"id":"39","question":"What is the primary function of a database?","options":["Render HTML","Store and manage data","Style web pages","Compile code"],"correctIndex":1,"category":"Programming"},
+    {"id":"40","question":"Which planet is known as the Red Planet?","options":["Venus","Jupiter","Mars","Saturn"],"correctIndex":2,"category":"Science"},
+    {"id":"41","question":"Which of these characters is NOT a boss in Crash Bash?","options":["Papu Papu","Komodo brothers","Ripper Roo","Nitros Oxide"],"correctIndex":2,"category":"Entertainment: Video Games"},
+    {"id":"42","question":"What was studio Trigger's first original long-form animated series for television?","options":["Kill la Kill","Kiznaiver","Inferno Cop","Gurren Lagann"],"correctIndex":0,"category":"Entertainment: Japanese Anime & Manga"},
+    {"id":"43","question":"In what sport is a \"shuttlecock\" used?","options":["Table Tennis","Badminton","Rugby","Cricket"],"correctIndex":1,"category":"Sports"},
+    {"id":"44","question":"What country is Cory in the House set in?","options":["Canada","Venezuala","The United States of America","England"],"correctIndex":2,"category":"Entertainment: Television"},
+    {"id":"45","question":"Which Shakespeare play inspired the musical 'West Side Story'?","options":["Hamlet","Romeo & Juliet","Macbeth","Othello"],"correctIndex":1,"category":"Entertainment: Musicals & Theatres"},
+    {"id":"46","question":"When did the British hand-over sovereignty of Hong Kong back to China?","options":["1997","1999","1841","1900"],"correctIndex":0,"category":"History"},
+    {"id":"47","question":"The computer OEM manufacturer Clevo, known for its Sager notebook line, is based in which country?","options":["United States","Taiwan","Germany","China (People's Republic of)"],"correctIndex":1,"category":"Science: Computers"},
+    {"id":"48","question":"In Black Hammer, what city did the heroes save from the Anti-God?","options":["Mega-City One","Spiral City","Rockwood","Star City"],"correctIndex":1,"category":"Entertainment: Comics"},
+    {"id":"49","question":"During WWII, in 1945, the United States dropped atomic bombs on the two Japanese cities of Hiroshima and what other city?","options":["Kawasaki","Tokyo","Kagoshima","Nagasaki"],"correctIndex":3,"category":"History"},
+    {"id":"50","question":"In the Homestuck Series, what is the alternate name for the Kingdom of Lights?","options":["Prospit","No Name","Golden City","Yellow Moon"],"correctIndex":0,"category":"Entertainment: Comics"},
+    {"id":"51","question":"In \"To Love-Ru\", who is the first to hear of Yami's past from her?","options":["Mikan","Lala","Haruna","Rito"],"correctIndex":3,"category":"Entertainment: Japanese Anime & Manga"},
+    {"id":"52","question":"What were the first two Pokémon games released?","options":["Red and Blue","Green and Blue","Red and Yellow","Red and Green"],"correctIndex":3,"category":"Entertainment: Video Games"},
+    {"id":"53","question":"What's the famous line Vaas says in \"Far Cry 3\"?","options":["Have I failed to entertain you?","Did I ever tell you the definition of Insanity?","You're my b*tch!","Maybe your best course...would be to tread lightly."],"correctIndex":1,"category":"Entertainment: Video Games"},
+    {"id":"54","question":"In \"Gravity Falls\", how much does Waddles weigh when Mable wins him in \"The Time Traveler's Pig\"?","options":["15 pounds","20 pounds","10 pounds","30 pounds"],"correctIndex":0,"category":"Entertainment: Cartoon & Animations"},
+    {"id":"55","question":"What studio animated Ouran High School Host Club?","options":["Production I.G","Kyoto Animation","xebec","Bones"],"correctIndex":3,"category":"Entertainment: Japanese Anime & Manga"},
+    {"id":"56","question":"In what year did Texas secede from Mexico?","options":["1838","1845","1844","1836"],"correctIndex":3,"category":"History"},
+    {"id":"57","question":"What is the make and model of the tour vehicles in \"Jurassic Park\" (1993)?","options":["1992 Toyota Land Cruiser","1992 Jeep Wrangler YJ Sahar","1992 Ford Explorer XLT","Mercedes M-Class"],"correctIndex":2,"category":"Entertainment: Film"},
+    {"id":"58","question":"The book \"Fahrenheit 451\" was written by whom?","options":["R. L. Stine","Ray Bradbury","Wolfgang Amadeus Mozart","Stephen King"],"correctIndex":1,"category":"Entertainment: Books"},
+    {"id":"59","question":"How many regular Sunken Sea Scrolls are there in \"Splatoon\"?","options":["27","32","30","5"],"correctIndex":0,"category":"Entertainment: Video Games"},
+    {"id":"60","question":"What was the UK \"Who Wants to be a Millionaire?\" cheating scandal known as?","options":["Ingram Cheater","Coughing Major","Major Fraud","Millionaire Crime"],"correctIndex":2,"category":"Entertainment: Television"},
+    {"id":"61","question":"What is the name of the Jewish New Year?","options":["Rosh Hashanah","Elul","New Year","Succoss"],"correctIndex":0,"category":"General Knowledge"},
+    {"id":"62","question":"Which American president appears on a one dollar bill?","options":["Thomas Jefferson","Abraham Lincoln","George Washington","Benjamin Franklin"],"correctIndex":2,"category":"General Knowledge"},
+    {"id":"63","question":"Which of these languages was NOT included in the 2016 song \"Don't Mind\" by Kent Jones?","options":["Japanese","French","Portuguese","Spanish"],"correctIndex":2,"category":"Entertainment: Music"},
+    {"id":"64","question":"In Stardew Valley, what is the reward for completing all of the Bulletin Board bundles?","options":["Glittering Boulder removed","Additional Friendship points","Bus is repaired","Greenhouse"],"correctIndex":1,"category":"Entertainment: Video Games"},
+    {"id":"65","question":"Originally another word for poppy, coquelicot is a shade of what?","options":["Green","Blue","Pink","Red"],"correctIndex":3,"category":"General Knowledge"},
+    {"id":"66","question":"Which of the following is NOT a word used to describe an earthquake?","options":["Foreshock","Drop-slide","Strike-slip","Temblor"],"correctIndex":1,"category":"Science & Nature"},
+    {"id":"67","question":"What are the names of the Ice Climbers in the video game Ice Climber?","options":["Popo and Nana","Popo and Nina","Papi and Nana","Papi and Nina"],"correctIndex":0,"category":"Entertainment: Video Games"},
+    {"id":"68","question":"How many cores does the Intel i7-6950X have?","options":["12","8","10","4"],"correctIndex":2,"category":"Science: Computers"},
+    {"id":"69","question":"What is the colour of unoxidized blood?","options":["Red","Blue","Purple","Green"],"correctIndex":0,"category":"Science & Nature"},
+    {"id":"70","question":"What is the romanized Arabic word for \"moon\"?","options":["Najma","Kawkab","Qamar","Shams"],"correctIndex":2,"category":"General Knowledge"},
+    {"id":"71","question":"In what year was Tchaikovsky's 1812 Overture composed?","options":["1812","1880","1790","1840"],"correctIndex":1,"category":"Entertainment: Music"},
+    {"id":"72","question":"In vanilla Minecraft, which of the following cannot be made into a block?","options":["Coal","Wheat","String","Charcoal"],"correctIndex":3,"category":"Entertainment: Video Games"},
+    {"id":"73","question":"Who was the President of the United States during the signing of the Gadsden Purchase?","options":["Andrew Johnson","Abraham Lincoln","James Polk","Franklin Pierce"],"correctIndex":3,"category":"History"},
+    {"id":"74","question":"Who are the two protagonists of the game Yakuza 0?","options":["Kazuma Kiryu and Goro Majima","Shintaro Kazama and Kazuma Kiryu","Keiji Shibusawa and Daisaku Kuze","Akira Nishikiyama and Tetsu Tachibana"],"correctIndex":0,"category":"Entertainment: Video Games"},
+    {"id":"75","question":"A Caixa Malacacheta is what kind of musical instrument which is commonly used in Latin American music?","options":["Cow Bell","Snare Drum","Bass Drum","Maraca"],"correctIndex":1,"category":"Entertainment: Music"},
+    {"id":"76","question":"In the novel 1984, written by George Orwell, what is the name of the totalitarian regime that controls Oceania?","options":["Neo-Bolshevism","INGSOC","Obliteration of the Self","Earth Alliance"],"correctIndex":1,"category":"Entertainment: Books"},
+    {"id":"77","question":"Brian May was the guitarist for which band?","options":["Pink Floyd","Queen","Rolling Stones","The Doors"],"correctIndex":1,"category":"Entertainment: Music"},
+    {"id":"78","question":"Cryoshell, known for \"Creeping in My Soul\" did the advertising music for what Lego Theme?","options":["Hero Factory","Ben 10 Alien Force","Star Wars","Bionicle"],"correctIndex":3,"category":"Entertainment: Music"},
+    {"id":"79","question":"How many seasons did the Sci-Fi television show \"Stargate Universe\" have?","options":["10","5","3","2"],"correctIndex":3,"category":"Entertainment: Television"},
+    {"id":"80","question":"The \"fairy\" type made it's debut in which generation of the Pokemon core series games?","options":["2nd","7th","6th","4th"],"correctIndex":2,"category":"General Knowledge"},
+    {"id":"81","question":"What was the name of the chemical that was dropped on Vietnam during the Vietnam war?","options":["Phosgene","Mustard Gas","Agent Orange","Hydrogen Cyanide"],"correctIndex":2,"category":"History"},
+    {"id":"82","question":"What was the last colony the UK ceded marking the end of the British Empire?","options":["India","Australia","Ireland","Hong Kong"],"correctIndex":3,"category":"History"},
+    {"id":"83","question":"Who was the last emperor of Mexico?","options":["Andrés Manuel López Obrador","Ferdinand Maximilian","Napoleon III","Agustín de Iturbide"],"correctIndex":1,"category":"History"},
+    {"id":"84","question":"\"Decapods\" are an order of ten-footed crustaceans. Which of these are NOT decapods?","options":["Lobsters","Krill","Shrimp","Crabs"],"correctIndex":1,"category":"Animals"},
+    {"id":"85","question":"In \"Clash Royale\" what is Arena 4 called?","options":["Barbarian Bowl","Spell Valley","P.E.K.K.A's Playhouse","Royal Arena"],"correctIndex":1,"category":"Entertainment: Video Games"},
+    {"id":"86","question":"What are the tallest twin buildings in the world, with a height of 1,483 ft (451.9 m)?","options":["Emirates Towers, United Arab Emirates","Huaguoyuan Towers, China","Petronas Twin Towers, Malaysia","Palm Towers, Qatar"],"correctIndex":2,"category":"General Knowledge"},
+    {"id":"87","question":"In the Super Smash Bros. series, which game first featured Luigi as a playable character?","options":["Super Smash Bros. Melee","Super Smash Bros. Brawl","Super Smash Bros.","Super Smash Bros. for Wii U"],"correctIndex":2,"category":"Entertainment: Video Games"},
+    {"id":"88","question":"What was the real name of the Albanian national leader Skanderbeg?","options":["Gjergj Kastrioti","Diturak Zhulati","Iskander Bejko","Mirash Krasniki"],"correctIndex":0,"category":"History"},
+    {"id":"89","question":"What is not a playable race in \"Final Fantasy XIV: A Realm Reborn\"?","options":["Miqo'te","Hume","Lalafell","Roegadyn"],"correctIndex":1,"category":"Entertainment: Video Games"},
+    {"id":"90","question":"What engine did the original \"Half-Life\" run on?","options":["GoldSrc","Source","Quake","Unreal"],"correctIndex":0,"category":"Entertainment: Video Games"},
+    {"id":"91","question":"The title of Adolf Hitler's autobiography \"Mein Kampf\" is what when translated to English?","options":["My Hatred","My Sadness","My Desire","My Struggle"],"correctIndex":3,"category":"Entertainment: Books"},
+    {"id":"92","question":"Who has played the most tournaments on the Brazilian national soccer team?","options":["Ronaldo","Cafu","Kakà","Roberto Carlos"],"correctIndex":1,"category":"Sports"},
+    {"id":"93","question":"Which animation studio produced \"Log Horizon\"?","options":["Sunrise","Xebec","Production I.G","Satelite"],"correctIndex":3,"category":"Entertainment: Japanese Anime & Manga"},
+    {"id":"94","question":"How many voice channels does the Super Nintendo Entertainment System support?","options":["8","6","10","12"],"correctIndex":0,"category":"Entertainment: Video Games"},
+    {"id":"95","question":"Which stand-up comedian voiced the talking parrot \"Iago\" in Disney's 1992 adaptation of Aladdin?","options":["Robin Williams","Gilbert Gottfried","Pauly Shore","Jonathan Freeman"],"correctIndex":1,"category":"Entertainment: Film"},
+    {"id":"96","question":"Which Norse God has a horse named Sleipnir?","options":["Thor","Frigg","Balder","Odin"],"correctIndex":3,"category":"Mythology"},
+    {"id":"97","question":"Which of the following characters is NOT playable in \"Resident Evil 6\"?","options":["Chris Redfield","Sherry Birkin","Jill Valentine","Helena Harper"],"correctIndex":2,"category":"Entertainment: Video Games"},
+    {"id":"98","question":"What was the name of the Ethiopian Wolf before they knew it was related to wolves?","options":["Simien Jackel","Ethiopian Coyote","Amharic Fox","Canis Simiensis"],"correctIndex":0,"category":"Animals"},
+    {"id":"99","question":"In \"Clash Royale\" what is Arena 4 called?","options":["Spell Valley","Barbarian Bowl","P.E.K.K.A's Playhouse","Royal Arena"],"correctIndex":0,"category":"Entertainment: Video Games"},
+    {"id":"100","question":"Which singer was featured in Jack Ü (Skrillex & Diplo)'s 2015 song 'Where Are Ü Now'?","options":["Selena Gomez","Ellie Goulding","Justin Bieber","The Weeknd"],"correctIndex":2,"category":"Entertainment: Music"}
+];
+
+// Fisher-Yates shuffle algorithm for randomizing array
+const shuffleArray = (array) => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+};
+
+// Get 15 random questions from the pool
+export const getQuizQuestions = () => {
+    const shuffled = shuffleArray(allQuestions);
+    return shuffled.slice(0, 15);
+};
+
+// Get all questions (for reference)
+export const getAllQuestions = () => allQuestions;

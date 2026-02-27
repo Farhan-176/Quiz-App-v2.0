@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { auth } from '../lib/supabase';
 import Navbar from '../components/Navbar';
 import './Auth.css';
 
@@ -35,54 +34,34 @@ const inputVariants = {
 };
 
 function Auth() {
-    const [isLogin, setIsLogin] = useState(true);
-    const [formData, setFormData] = useState({ username: '', password: '', email: '' });
+    const [username, setUsername] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        setUsername(e.target.value);
+        setError('');
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         setIsLoading(true);
-        setError('');
 
-        try {
-            if (isLogin) {
-                // Sign in
-                const { user, session, profile } = await auth.signIn(formData.email, formData.password);
-                
-                localStorage.setItem('token', session.access_token);
-                localStorage.setItem('currentUser', JSON.stringify({
-                    username: profile?.username || formData.email.split('@')[0],
-                    email: formData.email
-                }));
-            } else {
-                // Sign up
-                const { user, session } = await auth.signUp(formData.email, formData.password, formData.username);
-                
-                if (session) {
-                    localStorage.setItem('token', session.access_token);
-                    localStorage.setItem('currentUser', JSON.stringify({
-                        username: formData.username,
-                        email: formData.email
-                    }));
-                } else {
-                    setError('Please check your email to confirm your account.');
-                    setIsLoading(false);
-                    return;
-                }
-            }
-
-            navigate('/');
-        } catch (err) {
-            setError(err.message || 'Authentication failed');
-        } finally {
+        if (!username.trim()) {
+            setError('Please enter a username');
             setIsLoading(false);
+            return;
         }
+
+        // Save username to localStorage
+        localStorage.setItem('username', username);
+        localStorage.setItem('currentUser', JSON.stringify({
+            username: username,
+        }));
+
+        setIsLoading(false);
+        navigate('/quiz');
     };
 
     return (
@@ -92,7 +71,6 @@ function Auth() {
             <main className="auth-void">
                 <AnimatePresence mode="wait">
                     <motion.div
-                        key={isLogin ? 'login' : 'register'}
                         className="auth-vault acrylic"
                         variants={vaultVariants}
                         initial="hidden"
@@ -100,52 +78,26 @@ function Auth() {
                         exit="exit"
                     >
                         <div className="vault-header">
-                            <span className="vault-tag">{isLogin ? 'Welcome Back' : 'Get Started'}</span>
+                            <span className="vault-tag">Welcome</span>
                             <h1 className="display-text small">
-                                {isLogin ? 'Sign In to' : 'Create Your'} <br />
-                                <span className="ethereal-gradient">{isLogin ? 'Your Account' : 'New Account'}</span>
+                                Enter Your <br />
+                                <span className="ethereal-gradient">Username</span>
                             </h1>
                         </div>
 
                         <form className="vault-form" onSubmit={handleSubmit}>
                             <div className="input-field">
-                                <label>Email Address</label>
+                                <label>Username</label>
                                 <motion.input
-                                    type="email"
-                                    name="email"
-                                    placeholder="your@email.com"
+                                    type="text"
+                                    name="username"
+                                    placeholder="Enter your name"
+                                    value={username}
                                     onChange={handleChange}
                                     variants={inputVariants}
                                     whileFocus="focus"
                                     required
-                                />
-                            </div>
-
-                            {!isLogin && (
-                                <div className="input-field">
-                                    <label>Username</label>
-                                    <motion.input
-                                        type="text"
-                                        name="username"
-                                        placeholder="Username"
-                                        onChange={handleChange}
-                                        variants={inputVariants}
-                                        whileFocus="focus"
-                                        required
-                                    />
-                                </div>
-                            )}
-
-                            <div className="input-field">
-                                <label>Password</label>
-                                <motion.input
-                                    type="password"
-                                    name="password"
-                                    placeholder="••••••••"
-                                    onChange={handleChange}
-                                    variants={inputVariants}
-                                    whileFocus="focus"
-                                    required
+                                    autoFocus
                                 />
                             </div>
 
@@ -160,28 +112,15 @@ function Auth() {
                             )}
 
                             <button className="btn-master full-width" disabled={isLoading}>
-                                {isLoading ? 'Authenticating...' : (isLogin ? 'Sign In' : 'Create Account')}
+                                {isLoading ? 'Loading...' : 'Start Quiz'}
                             </button>
                         </form>
 
                         <div className="vault-footer">
-                            <button className="switch-btn" onClick={() => setIsLogin(!isLogin)}>
-                                {isLogin ? "Don't have an account? Sign Up" : "Already have an account? Sign In"}
-                            </button>
+                            <p>No login required! Just enter your name to begin the quiz.</p>
                         </div>
                     </motion.div>
                 </AnimatePresence>
-
-                {isLogin && (
-                    <motion.div
-                        className="demo-vault-info"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1 }}
-                    >
-                        <p>Guest Credentials: <span>demo@quiz.com / demo123</span></p>
-                    </motion.div>
-                )}
             </main>
         </div>
     );

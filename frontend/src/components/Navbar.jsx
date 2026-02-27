@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState, useRef } from 'react';
 import './Navbar.css';
 
-const Navbar = () => {
+const Navbar = ({ quizCounter = null, timer = null }) => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [user, setUser] = useState(null);
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -66,9 +66,17 @@ const Navbar = () => {
                     {user?.username && (
                         <>
                             <Link to="/quiz" className={`nav-link ${location.pathname === '/quiz' ? 'active' : ''}`}>Quizzes</Link>
-                            <Link to="/leaderboard" className={`nav-link ${location.pathname === '/leaderboard' ? 'active' : ''}`}>Leaderboard</Link>
                         </>
                     )}
+                    
+                    {/* Quiz Counter and Timer - Fixed */}
+                    {quizCounter && timer !== null && (
+                        <div className="quiz-info-section">
+                            <span className="quiz-counter">{quizCounter}</span>
+                            <span className="quiz-timer">{timer}s</span>
+                        </div>
+                    )}
+                    
                     {user?.username ? (
                         <div className="nav-user-wrapper" ref={dropdownRef}>
                             <div className="nav-user" onClick={() => setDropdownOpen(!dropdownOpen)}>

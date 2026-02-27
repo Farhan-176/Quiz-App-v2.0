@@ -5,7 +5,7 @@
     right: 0;
     margin: 0 auto;
     width: calc(100% - 4rem);
-    max-width: 1200px;
+    max-width: 100%;
     z-index: 1000;
     padding: 1rem 2rem;
     border-radius: var(--radius-lg);
@@ -16,7 +16,7 @@
 .navbar.scrolled {
     top: 1rem;
     width: calc(100% - 4rem);
-    max-width: 1200px;
+    max-width: 100%;
     background: var(--acrylic-bg);
     backdrop-filter: blur(var(--acrylic-blur)) saturate(var(--acrylic-saturate));
     -webkit-backdrop-filter: blur(var(--acrylic-blur)) saturate(var(--acrylic-saturate));
@@ -28,7 +28,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 2rem;
+    gap: 3rem;
     width: 100%;
 }
 
@@ -65,17 +65,20 @@
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 2.5rem;
+    gap: 3.5rem;
+    flex: 1;
+    justify-content: flex-end;
 }
 
 .nav-link {
     text-decoration: none;
     color: var(--text-ghost);
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 0.9rem;
+    font-family: 85rem;
     letter-spacing: 0.05em;
     text-transform: uppercase;
+    transition: var(--transition-fluid);
+    position: relative;
+    white-space: nowrappercase;
     transition: var(--transition-fluid);
     position: relative;
 }
@@ -102,13 +105,14 @@
 }
 
 .nav-user {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.4rem 0.75rem 0.4rem 0.6rem;
+    display: fl5rem 1rem 0.5rem 0.6rem;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--acrylic-border);
     border-radius: 100px;
+    cursor: pointer;
+    transition: var(--transition-fluid);
+    user-select: none;
+    white-space: nowrap0px;
     cursor: pointer;
     transition: var(--transition-fluid);
     user-select: none;
@@ -124,10 +128,11 @@
     color: var(--text-ghost);
     transition: var(--transition-fluid);
 }
-
-.user-name {
-    font-size: 0.8rem;
+75rem;
     font-weight: 700;
+    color: var(--text-ethereal);
+    margin-left: 0.5rem;
+    white-space: nowrap
     color: var(--text-ethereal);
     margin-left: 0.5rem;
 }
@@ -281,4 +286,32 @@
     .logo-text {
         display: none;
     }
+}
+
+/* ── Quiz Info Section (Fixed in Navbar) ── */
+.quiz-info-section {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 0 1.5rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    white-space: nowrap;
+}
+
+.quiz-counter {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--text-ghost);
+}
+
+.quiz-timer {
+    font-size: 1.5rem;
+    font-family: var(--font-display);
+    font-weight: 800;
+    color: white;
+    min-width: 45px;
+    text-align: right;
 }

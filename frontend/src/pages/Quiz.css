@@ -10,8 +10,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 3rem 0;
-    /* Reduced from 6rem */
+    padding: 3rem 2rem;
 }
 
 /* Subtle Background Indicators */
@@ -55,8 +54,8 @@
 
 /* Zen Elements */
 .zen-header {
-    margin-bottom: 1.5rem;
-    /* Reduced from 3rem */
+    margin-bottom: 2.5rem;
+    display: none;
 }
 
 .header-top {
@@ -132,25 +131,25 @@
 
 .display-text.centered {
     text-align: center;
-    margin-bottom: 2rem;
-    /* Reduced from 3rem */
-    font-size: 2.5rem;
-    /* Explicitly set to a smaller size */
-    line-height: 1.2;
+    margin-bottom: 4rem;
+    font-size: 2.2rem;
+    line-height: 1.3;
+    word-wrap: break-word;
+    word-break: break-word;
 }
 
 .zen-options-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    /* Reduced from 1.5rem */
+    gap: 1.5rem;
     max-width: 1000px;
     margin: 0 auto;
+    padding: 0 1rem;
 }
 
 .zen-option {
     padding: 1.5rem 2rem;
-    /* Reduced from 2.5rem */
+    /* Reduced 75rem 2rem;
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-lg);
@@ -160,9 +159,8 @@
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    /* Reduced from 2rem */
     transition: var(--transition-fluid);
-}
+    min-height: 60px
 
 .zen-option:hover {
     background: rgba(255, 255, 255, 0.1);
@@ -232,13 +230,11 @@
 .zen-footer {
     margin-top: 2rem;
     /* Reduced from 4rem */
+    display: fle3rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    /* Reduced from 2rem */
-}
-
 .keyboard-hint {
     font-size: 0.75rem;
     color: var(--text-ghost);

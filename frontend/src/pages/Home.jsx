@@ -171,15 +171,15 @@ function Home() {
                             <motion.div className="cta-group" variants={textFade}>
                                 {user ? (
                                     <Link to="/quiz" className="btn-master outline">
-                                        View Quizzes
+                                        Start Quiz
                                     </Link>
                                 ) : (
                                     <Link to="/auth" className="btn-master outline">
                                         Get Started
                                     </Link>
                                 )}
-                                <Link to="/leaderboard" className="btn-master ghost">
-                                    Global Rankings
+                                <Link to="/" className="btn-master ghost">
+                                    Learn More
                                 </Link>
                             </motion.div>
                         </div>
