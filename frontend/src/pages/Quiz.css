@@ -149,7 +149,6 @@
 
 .zen-option {
     padding: 1.5rem 2rem;
-    /* Reduced 75rem 2rem;
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-lg);
@@ -160,7 +159,8 @@
     align-items: center;
     gap: 1.5rem;
     transition: var(--transition-fluid);
-    min-height: 60px
+    min-height: 60px;
+}
 
 .zen-option:hover {
     background: rgba(255, 255, 255, 0.1);
@@ -230,11 +230,12 @@
 .zen-footer {
     margin-top: 2rem;
     /* Reduced from 4rem */
-    display: fle3rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+}
+
 .keyboard-hint {
     font-size: 0.75rem;
     color: var(--text-ghost);
