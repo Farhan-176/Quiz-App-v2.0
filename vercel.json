@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json.schemastore.org/vercel",
+  "buildCommand": "npm install && npm run build",
+  "outputDirectory": "frontend/dist",
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

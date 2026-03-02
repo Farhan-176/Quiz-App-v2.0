@@ -105,17 +105,17 @@
 }
 
 .nav-user {
-    display: fl5rem 1rem 0.5rem 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 1rem;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--acrylic-border);
     border-radius: 100px;
     cursor: pointer;
     transition: var(--transition-fluid);
     user-select: none;
-    white-space: nowrap0px;
-    cursor: pointer;
-    transition: var(--transition-fluid);
-    user-select: none;
+    white-space: nowrap;
 }
 
 .nav-user:hover {
@@ -129,11 +129,13 @@
     transition: var(--transition-fluid);
 }
 
-.nav-username {
+.nav-username,
+.user-name {
     font-weight: 700;
     color: var(--text-ethereal);
-    margin-left: 0.5rem;
+    margin-left: 0;
     white-space: nowrap;
+    font-size: 0.875rem;
 }
 
 .user-avatar {
